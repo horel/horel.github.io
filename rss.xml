@@ -1,0 +1,331 @@
+<?xml version="1.0"?>
+<rss version="2.0">
+    <channel>
+        <title>隙驹</title>
+        <subtitle>攻城狮不是工程师</subtitle>
+        <icon>http://horel.github.io/images/favicon.ico</icon>
+        <link>http://horel.github.io</link>
+        <author>
+          <name>隙驹</name>
+        </author>
+        <description>= 攻城狮不是工程师 =</description>
+        <language>zh-CN</language>
+        <pubDate>Sun, 16 May 2021 21:13:06 +0800</pubDate>
+        <lastBuildDate>Sun, 16 May 2021 21:13:06 +0800</lastBuildDate>
+        <category term="Linux" />
+        <category term="Game" />
+        <item>
+            <guid isPermalink="true">http://horel.github.io/notes/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6%E2%80%94%E2%80%94%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</guid>
+            <title>计算机图形学——学习笔记</title>
+            <link>http://horel.github.io/notes/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6%E2%80%94%E2%80%94%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</link>
+            <category term="二进制玄学" scheme="http://horel.github.io/categories/notes/" />
+            <category term="C++" scheme="http://horel.github.io/tags/C/" />
+            <category term="计算机图形学" scheme="http://horel.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/" />
+            <pubDate>Sun, 16 May 2021 21:13:06 +0800</pubDate>
+            <description><![CDATA[ &lt;div class=&#34;note info&#34;&gt;
+&lt;p&gt;终于迈出学习计算机图形学的第一步了......&lt;/p&gt;
+&lt;/div&gt;
+&lt;p&gt;&lt;ins class=&#34;dot&#34;&gt;喜欢上计算机图形学的起因大概是听了传奇程序员&lt;mark&gt;约翰・卡马克&lt;/mark&gt;的故事，这位推动了 3D 发展的大佬给我留下了无比深刻的印象。&lt;/ins&gt;&lt;/p&gt;
+&lt;p&gt;&lt;s class=&#34;danger&#34;&gt;再加上我对渲染、光追、VR、AR 等等也都很感兴趣，就想去了解更多，于是也就有了这篇记录博客。&lt;/s&gt;&lt;/p&gt;
+&lt;p&gt;&lt;ins class=&#34;wavy&#34;&gt;计划先观看闫令琪大佬的视屏：GAMES101 - 现代计算机图形学入门&lt;/ins&gt;&lt;/p&gt;
+&lt;p&gt;&lt;div class=&#34;links&#34;&gt;&lt;div class=&#34;item&#34; title=&#34;闫令琪&#34; style=&#34;--block-color:#e9546b;&#34;&gt;&lt;span class=&#34;exturl image&#34; data-url=&#34;aHR0cHM6Ly93d3cuYmlsaWJpbGkuY29tL3ZpZGVvL0JWMVg3NDExRjc0ND9mcm9tPXNlYXJjaCZzZWlkPTE2MjI4MzA3NTExNjQ5MTIzNTYw&#34; data-background-image=&#34;https://tva4.sinaimg.cn/large/008ieO5lly8gpxh7gr2ajj308c08c3yp.jpg&#34;&gt;&lt;/span&gt;
+          &lt;div class=&#34;info&#34;&gt;
+          &lt;span class=&#34;exturl title&#34; data-url=&#34;aHR0cHM6Ly93d3cuYmlsaWJpbGkuY29tL3ZpZGVvL0JWMVg3NDExRjc0ND9mcm9tPXNlYXJjaCZzZWlkPTE2MjI4MzA3NTExNjQ5MTIzNTYw&#34;&gt;GAMES101-现代计算机图形学入门&lt;/span&gt;
+          &lt;p class=&#34;desc&#34;&gt;闫令琪&lt;/p&gt;
+          &lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/p&gt;
+&lt;div class=&#34;note success&#34;&gt;
+&lt;p&gt;&lt;s class=&#34;danger&#34;&gt;从入门到放弃&lt;/s&gt;进度&lt;/p&gt;
+&lt;/div&gt;
+&lt;ul class=&#34;task-list&#34;&gt;
+&lt;li class=&#34;task-list-item&#34;&gt;&lt;input type=&#34;checkbox&#34; id=&#34;cbx_0&#34; disabled=&#34;true&#34; /&gt;&lt;label for=&#34;cbx_0&#34;&gt; P1——P5&lt;/label&gt;&lt;/li&gt;
+&lt;li class=&#34;task-list-item&#34;&gt;&lt;input type=&#34;checkbox&#34; id=&#34;cbx_1&#34; disabled=&#34;true&#34; /&gt;&lt;label for=&#34;cbx_1&#34;&gt; P5——P22&lt;/label&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;span class=&#34;spoiler&#34; title=&#34;你知道得太多了&#34;&gt;不能放弃，坚持！&lt;/span&gt;&lt;/p&gt;
+ ]]></description>
+        </item>
+        <item>
+            <guid isPermalink="true">http://horel.github.io/game-anime/%E7%B4%AB%E7%BD%97%E5%85%B0%E6%B0%B8%E6%81%92%E8%8A%B1%E5%9B%AD/</guid>
+            <title>紫罗兰永恒花园</title>
+            <link>http://horel.github.io/game-anime/%E7%B4%AB%E7%BD%97%E5%85%B0%E6%B0%B8%E6%81%92%E8%8A%B1%E5%9B%AD/</link>
+            <category term="游戏与动漫" scheme="http://horel.github.io/categories/game-anime/" />
+            <category term="动漫" scheme="http://horel.github.io/tags/%E5%8A%A8%E6%BC%AB/" />
+            <category term="随笔" scheme="http://horel.github.io/tags/%E9%9A%8F%E7%AC%94/" />
+            <pubDate>Sun, 09 May 2021 09:07:04 +0800</pubDate>
+            <description><![CDATA[ &lt;h1 id=&#34;紫罗兰永恒花园&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#紫罗兰永恒花园&#34;&gt;#&lt;/a&gt; 《紫罗兰永恒花园》&lt;/h1&gt;
+&lt;div class=&#34;note info&#34;&gt;
+&lt;p&gt;薇妹美如画！&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;tab&#34; data-id=&#34;id1&#34; data-title=&#34;亲爱的基尔伯特少佐:&#34;&gt;
+&lt;p&gt;  &lt;span class=&#34;pink&#34;&gt;你还好吧，别来无恙吗？现在在哪呢？有没有烦恼呢？&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;  &lt;span class=&#34;blue&#34;&gt;春夏秋冬，四季轮转，只有少佐的季节迟迟不来。&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;  &lt;span class=&#34;orange&#34;&gt;我起初不懂，一点都不懂少佐的心意。可是在少佐赐予我的全新人生中，我能稍微感受到一些了。通过代笔写信，通过我遇见的人们，我相信着，少佐一定还活在某个地方。所以我也要，一直，一直活下去。即使不知道今后会遇见什么，也要一直活下去。&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;  &lt;span class=&#34;red&#34;&gt;如果能再见&lt;/span&gt;&lt;br /&gt;
+  &lt;span class=&#34;aqua&#34;&gt;我想告诉你&lt;/span&gt;&lt;br /&gt;
+  &lt;span class=&#34;blue&#34;&gt;我现在对「爱」也有所理解了&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;div class=&#34;links&#34;&gt;&lt;div class=&#34;item&#34; title=&#34;——没有一封信是不值得送达的&#34; style=&#34;--block-color:#9d5b8b;&#34;&gt;&lt;span class=&#34;exturl image&#34; data-url=&#34;aHR0cHM6Ly93d3cuYmlsaWJpbGkuY29tL2Jhbmd1bWkvcGxheS9lcDE3MzI4Ng==&#34; data-background-image=&#34;https://tva4.sinaimg.cn/large/008ieO5lly8gqbwu0fjchj31hc0u0drh.jpg&#34;&gt;&lt;/span&gt;
+          &lt;div class=&#34;info&#34;&gt;
+          &lt;span class=&#34;exturl title&#34; data-url=&#34;aHR0cHM6Ly93d3cuYmlsaWJpbGkuY29tL2Jhbmd1bWkvcGxheS9lcDE3MzI4Ng==&#34;&gt;《紫罗兰永恒花园》&lt;/span&gt;
+          &lt;p class=&#34;desc&#34;&gt;bilibili《紫罗兰永恒花园》&lt;/p&gt;
+          &lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;p&gt;  对于我来说，这是我这两年来觉得最棒的也是我最喜欢的作品。紫罗兰永恒花园以爱为主题发挥的淋漓尽致。&lt;/p&gt;
+&lt;p&gt;  战争结束后，原本只是个没有感情的杀人工具的薇尔莉特，第一次进入了人类的社会，她带着最敬爱的少佐的遗愿，开始了学习 “爱” 的意义，最开始，她所有的常识都让她显得与周围格格不入，也处处碰壁，但是周围的人都给与了她足够的宽容与信任，让她能够从零开始，渐渐地萌生了人性，萌生了情感，理解了人心，理解了爱。&lt;br /&gt;
+  直到她在理解这些以后，再次正视了自己沾满鲜血与杀戮的过去，接受了少佐的死，终于浴火重生，成为了一个真正的人，不再依靠少佐的命令，而是自己真正的愿望去生活。&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://tva1.sinaimg.cn/large/008ieO5lly8gqk5gsgubgj30u01kan5v.jpg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;div class=&#34;tab&#34; data-id=&#34;id2&#34; data-title=&#34;——《紫罗兰永恒花园》第一话&#34;&gt;
+&lt;p&gt;&lt;span class=&#34;pink&#34;&gt;“你想做自动手记人偶的工作？”&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;aqua&#34;&gt;“是的，虽然目前难以执笔书写…… 打字机还是能够操作的。”&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;pink&#34;&gt;“我不是这意思，是问你为什么想做这份工作……”&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;aqua&#34;&gt;“—— 我想知道！”&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;pink&#34;&gt;我想知道，“爱”—— 是什么意思。&lt;/span&gt;&lt;/p&gt;
+&lt;/div&gt;
+ ]]></description>
+        </item>
+        <item>
+            <guid isPermalink="true">http://horel.github.io/game-anime/%E9%BB%91%E6%9A%97%E4%B9%8B%E9%AD%823/</guid>
+            <title>黑暗之魂3</title>
+            <link>http://horel.github.io/game-anime/%E9%BB%91%E6%9A%97%E4%B9%8B%E9%AD%823/</link>
+            <category term="游戏与动漫" scheme="http://horel.github.io/categories/game-anime/" />
+            <category term="随笔" scheme="http://horel.github.io/tags/%E9%9A%8F%E7%AC%94/" />
+            <category term="游戏" scheme="http://horel.github.io/tags/%E6%B8%B8%E6%88%8F/" />
+            <pubDate>Tue, 27 Apr 2021 11:40:30 +0800</pubDate>
+            <description><![CDATA[ &lt;h1 id=&#34;黑暗之魂3&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#黑暗之魂3&#34;&gt;#&lt;/a&gt; 黑暗之魂 3&lt;/h1&gt;
+&lt;div class=&#34;note info&#34;&gt;
+&lt;p&gt;兄弟，传火吗？&lt;/p&gt;
+&lt;/div&gt;
+&lt;p&gt;&lt;span class=&#34;label primary&#34;&gt;世界的诞生与原初之火&lt;/span&gt; &lt;span class=&#34;label info&#34;&gt;神建立的秩序&lt;/span&gt; &lt;span class=&#34;label success&#34;&gt;堕落的根源&lt;/span&gt; &lt;span class=&#34;label&#34;&gt;传火&lt;/span&gt; &lt;span class=&#34;label danger&#34;&gt;不死的根源&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;魂系列的成功不仅仅是复兴了 FC 时代的经典机制，还将硬核向的 RPG 体验做到了相当的高度，其出色的场景设计和氛围渲染同样令人着迷，这点得益于宫崎英高特有的个人风格和审美。魂系列惜字如金的语言风格和丰满的场景叙事熔铸为一体，塑造了这个独特、令人印象深刻的绮丽世界。&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://tva1.sinaimg.cn/large/008ieO5lly8gpyhotvpcwj30qo2b7k5d.jpg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;黑魂 3 作为我尝试的第一部宫崎英高的作品，它确实有着独特的魅力。无论是恢宏的背景、各个富有魅力的 NPC、精妙的地图设计、让人热血澎湃的 BOSS 战、还是充满未知的探图，无处不体会到宫崎英高老贼的恶意和丰富的游戏性。&lt;/p&gt;
+&lt;p&gt;我很庆幸没有在中途放弃，从而让我体验到了这波澜壮阔，如同史诗般的游戏之旅。一开始，我也被所传的 “高难度” 而踌躇不前，但游戏内其实充满了提示与 “官方逃课方法”。在初见杀之后，玩家能很快掌握技巧与利用提示过 BOSS。我觉得很巧妙的一点就是黑魂 3 在难度与过难影响游戏体验上达到了统一，我能清晰的体验到每一次死亡后自己的进步，也会因为通过每一个 BOSS 而欣喜，这真的很难得。&lt;/p&gt;
+&lt;p&gt;终达成了白金成就，在三个结局里&lt;span class=&#34;spoiler bulr&#34; title=&#34;你知道得太多了&#34;&gt;不包含坏东西结局&lt;/span&gt;我最喜欢的就是灭火结局。当初火熄灭，世界重归黑暗时，传来防火女的声音：Ashen one, hearing sound my voice still？留给我的只有史诗般的回忆。&lt;/p&gt;
+ ]]></description>
+        </item>
+        <item>
+            <guid isPermalink="true">http://horel.github.io/notes/Arch-Linux%E6%8C%87%E5%8D%97/</guid>
+            <title>Arch Linux指南</title>
+            <link>http://horel.github.io/notes/Arch-Linux%E6%8C%87%E5%8D%97/</link>
+            <category term="二进制玄学" scheme="http://horel.github.io/categories/notes/" />
+            <category term="教程" scheme="http://horel.github.io/tags/%E6%95%99%E7%A8%8B/" />
+            <category term="Linux" scheme="http://horel.github.io/tags/Linux/" />
+            <pubDate>Mon, 26 Apr 2021 22:50:04 +0800</pubDate>
+            <description><![CDATA[ &lt;div class=&#34;note info&#34;&gt;
+&lt;p&gt;请提前准备好镜像，启动 U 盘，设置好 BIOS 等&lt;/p&gt;
+&lt;/div&gt;
+&lt;h1 id=&#34;基础系统安装&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#基础系统安装&#34;&gt;#&lt;/a&gt; 基础系统安装&lt;/h1&gt;
+&lt;h3 id=&#34;确认是否为-uefi-模式&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#确认是否为-uefi-模式&#34;&gt;#&lt;/a&gt; 确认是否为 UEFI 模式&lt;/h3&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;figcaption data-lang=&#34;bash&#34;&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token function&#34;&gt;ls&lt;/span&gt; /sys/firmware/efi/efivars&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;p&gt;若输出了一堆东西，即 efi 变量，则说明已在 UEFI 模式。否则请确认你的启动方式是否为 UEFI。&lt;/p&gt;
+&lt;h3 id=&#34;启动参数修改&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#启动参数修改&#34;&gt;#&lt;/a&gt; 启动参数修改&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;添加 &lt;code&gt;modprobe.blacklist=nouveau&lt;/code&gt;  以禁用开源驱动&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;使用iwd联网&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#使用iwd联网&#34;&gt;#&lt;/a&gt; 使用 iwd 联网&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;iwctl&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;device list&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;station device scan&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;station wlan0 connect &amp;quot;Redmi_xxx&amp;quot;&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;更新系统时间&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#更新系统时间&#34;&gt;#&lt;/a&gt; 更新系统时间&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;timedatectl set-ntp true&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;timedatectl status&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;分区&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#分区&#34;&gt;#&lt;/a&gt; 分区&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;lsblk&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;gdisk /dev/nvme0n1&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;ef00、8400&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;mkfs.fat -F32 /dev/nvme0n1p1&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;mkswap /dev/nvme0n1p2&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;swapon /dev/nvme0n1p2&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;mkfs.xfs /dev/nvme0n1p3&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;mkfs.xfs /dev/nvme0n1p4&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;mount /dev/nvme0n1p3 /mnt&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;mkdir /mnt/boot&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;mkdir /mnt/home&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;mount /dev/nvme0n1p1 /mnt/boot&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;mount /dev/nvme0n1p4 /mnt/home&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;选择镜像&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#选择镜像&#34;&gt;#&lt;/a&gt; 选择镜像&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;vim /etc/pacman.d/mirrorlist&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Server = https://mirrors.bfsu.edu.cn/archlinux/$repo/os/$arch&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;安装必须软件包&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#安装必须软件包&#34;&gt;#&lt;/a&gt; 安装必须软件包&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;pacstrap /mnt bash-completion iwd dhcpcd base base-devel linux linux-firmware linux-headers man man-db man-pages texinfo vim xfsprogs nvidia nvidia-utils nvidia-settings opencl-nvidia &lt;/code&gt;&lt;/p&gt;
+&lt;h3 id=&#34;生成fstab&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#生成fstab&#34;&gt;#&lt;/a&gt; 生成 Fstab&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;genfstab -U /mnt &amp;gt;&amp;gt; /mnt/etc/fstab&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;vim /mnt/etc/fstab&lt;/code&gt;&lt;/p&gt;
+&lt;h3 id=&#34;chroot&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#chroot&#34;&gt;#&lt;/a&gt; Chroot&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;arch-chroot /mnt&lt;/code&gt;&lt;/p&gt;
+&lt;h3 id=&#34;本地化&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#本地化&#34;&gt;#&lt;/a&gt; 本地化&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;hwclock --systohc&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;vim /etc/locale.genq&lt;/code&gt;  取消注释&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;locale-gen&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;vim /etc/locale.conf&lt;/code&gt; 		 &lt;code&gt;LANG=en_US.UTF-8&lt;/code&gt;&lt;/p&gt;
+&lt;h3 id=&#34;网络配置&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#网络配置&#34;&gt;#&lt;/a&gt; 网络配置&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;vim /etc/hostname&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;AORUS&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;vim /etc/hosts&lt;/code&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;127.0.0.1	localhost
+::1		localhost
+127.0.1.1	AORUS.localdomain	AORUS
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;initramfs&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#initramfs&#34;&gt;#&lt;/a&gt; Initramfs&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;mkinitcpio -P&lt;/code&gt;&lt;/p&gt;
+&lt;h3 id=&#34;密码&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#密码&#34;&gt;#&lt;/a&gt; 密码&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;passwd&lt;/code&gt;&lt;/p&gt;
+&lt;h3 id=&#34;安装引导程序&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#安装引导程序&#34;&gt;#&lt;/a&gt; 安装引导程序&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;pacman -Sy grub efibootmgr os-prober xfsprogs ntfs-3g&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;mkdir MS&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;mount /dev/nvme1n1p1 MS&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=Arch --recheck&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;grub-mkconfig -o /boot/grub/grub.cfg&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;exit&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;umount -R /mnt&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;reboot&lt;/code&gt;&lt;/p&gt;
+&lt;h2 id=&#34;桌面环境安装&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#桌面环境安装&#34;&gt;#&lt;/a&gt; 桌面环境安装&lt;/h2&gt;
+&lt;h3 id=&#34;联网&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#联网&#34;&gt;#&lt;/a&gt; 联网&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;systemctl start iwd&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;dhcpcd&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;iwctl&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;station wlan0 connect &amp;quot;Redmi_xxx&amp;quot;&lt;/code&gt;&lt;/p&gt;
+&lt;h3 id=&#34;新建用户并授权&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#新建用户并授权&#34;&gt;#&lt;/a&gt; 新建用户并授权&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;useradd -m -G wheel limbo&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;EDITOR=vim visudo&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;%wheel ALL=(ALL) ALL&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;exit&lt;/code&gt;&lt;/p&gt;
+&lt;h3 id=&#34;安装桌面&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#安装桌面&#34;&gt;#&lt;/a&gt; 安装桌面&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;sudo pacman -S xorg gdm gnome gnome-tweaks&lt;/code&gt;&lt;/p&gt;
+&lt;h3 id=&#34;自启动设置&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#自启动设置&#34;&gt;#&lt;/a&gt; 自启动设置&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;sudo systemctl preset-all&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;sudo systemctl enable gdm&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;sudo systemctl enable NetworkManager&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;sudo systemctl enable bluetooth&lt;/code&gt;&lt;/p&gt;
+&lt;h3 id=&#34;配置cn源&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#配置cn源&#34;&gt;#&lt;/a&gt; 配置 CN 源&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;vim /etc/pacman .conf&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;[archlinuxcn]&lt;/p&gt;
+&lt;p&gt;Server = &lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9taXJyb3JzLmJmc3UuZWR1LmNuL2FyY2hsaW51eGNuLyRhcmNo&#34;&gt;https://mirrors.bfsu.edu.cn/archlinuxcn/$arch&lt;/span&gt;&lt;/p&gt;
+&lt;h3 id=&#34;安装软件&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#安装软件&#34;&gt;#&lt;/a&gt; 安装软件&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;sudo pacman -S zsh alacritty git wget google-chrome firefox neofetch gcc gdb clang llvm nodejs yarn&lt;/code&gt;&lt;/p&gt;
+&lt;h3 id=&#34;安装fcitx5&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#安装fcitx5&#34;&gt;#&lt;/a&gt; 安装 Fcitx5&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;sudo pacman -S fcitx5-im fcitx5-chinese-addons&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;另外 CN 源有词库可用：&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;sudo pacman -S fcitx5-pinyin-&amp;#123;zhwiki,moegirl&amp;#125;&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;主题参考：&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9naXRodWIuY29tL2hvc3h5L0ZjaXR4NS1NYXRlcmlhbC1Db2xvcg==&#34;&gt;https://github.com/hosxy/Fcitx5-Material-Color&lt;/span&gt;&lt;/p&gt;
+&lt;h2 id=&#34;美化&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#美化&#34;&gt;#&lt;/a&gt; 美化&lt;/h2&gt;
+&lt;p&gt;多看看 https://www.gnome-look.org/browse/cat/&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;pacman -S papirus-icon-theme&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;xcursor-breeze&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;放在.local/share/icons 和.local/share/themes&lt;/p&gt;
+&lt;p&gt;扩展：&lt;/p&gt;
+&lt;p&gt;appindicator and kstatusnotifieritem support&lt;/p&gt;
+&lt;p&gt;arcmenu&lt;/p&gt;
+&lt;p&gt;caffeine&lt;/p&gt;
+&lt;p&gt;dash to dock&lt;/p&gt;
+&lt;p&gt;openweather&lt;/p&gt;
+&lt;p&gt;transparent top bar&lt;/p&gt;
+&lt;p&gt;user themes&lt;/p&gt;
+&lt;p&gt;自体：&lt;/p&gt;
+&lt;p&gt;从 github 上捞字体安装和配置&lt;/p&gt;
+&lt;h2 id=&#34;基础软件安装配置&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#基础软件安装配置&#34;&gt;#&lt;/a&gt; 基础软件安装配置&lt;/h2&gt;
+&lt;h2 id=&#34;终端&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#终端&#34;&gt;#&lt;/a&gt; 终端&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;sudo pacman -S alacritty&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;再从 github 上捞配置&lt;/p&gt;
+&lt;h2 id=&#34;vim&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#vim&#34;&gt;#&lt;/a&gt; vim&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;sudo pacman -S neovim nodejs yarn python-pynvim xsel&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;捞 zsh 配置有添加 yrm 环境变量&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;yarn global add yrm&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;yrm use taobao&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;yarn global add neovim&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;:checkhealth&lt;/p&gt;
+&lt;p&gt;安装 vim-plug：&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9naXRodWIuY29tL2p1bmVndW5uL3ZpbS1wbHVn&#34;&gt;https://github.com/junegunn/vim-plug&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;再捞配置&lt;/p&gt;
+&lt;p&gt;:PlugInstall&lt;/p&gt;
+&lt;p&gt;CocInstall coc-marketplace&lt;/p&gt;
+&lt;p&gt;coc-word&lt;/p&gt;
+&lt;p&gt;coc-tabnine&lt;/p&gt;
+&lt;p&gt;coc-snippets&lt;/p&gt;
+&lt;p&gt;coc-pairs&lt;/p&gt;
+&lt;p&gt;coc-highlight&lt;/p&gt;
+&lt;p&gt;coc-clangd&lt;/p&gt;
+&lt;h2 id=&#34;修gdm和nvidia冲突bug&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#修gdm和nvidia冲突bug&#34;&gt;#&lt;/a&gt; 修 gdm 和 nvidia 冲突 bug！&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;让 nvidia 启动写进 kernel modules，提前启动&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;sudo nvim /etc/mkinitcpio.conf&lt;/p&gt;
+&lt;p&gt;MODULES=(nvidia nvidia_modeset nvidia_uvm nvidia_drm)&lt;/p&gt;
+&lt;p&gt;HOOKS=(base udev autodetect modconf block filesystems keyboard fsck)&lt;/p&gt;
+&lt;p&gt;sudo nvim /etc/default/grub&lt;/p&gt;
+&lt;p&gt;内核参数加 nvidia-drm.modeset=1&lt;/p&gt;
+&lt;p&gt;sudo mkinitcpio -P&lt;/p&gt;
+&lt;p&gt;sudo grub-mkconfig -o /boot/grub/grub.cfg&lt;/p&gt;
+ ]]></description>
+        </item>
+        <item>
+            <guid isPermalink="true">http://horel.github.io/notes/2021%E6%96%B0%E8%AE%A1%E5%88%92/</guid>
+            <title>2021新计划</title>
+            <link>http://horel.github.io/notes/2021%E6%96%B0%E8%AE%A1%E5%88%92/</link>
+            <category term="二进制玄学" scheme="http://horel.github.io/categories/notes/" />
+            <category term="计划" scheme="http://horel.github.io/tags/%E8%AE%A1%E5%88%92/" />
+            <pubDate>Mon, 26 Apr 2021 22:03:40 +0800</pubDate>
+            <description><![CDATA[ &lt;h1 id=&#34;2021年的新计划&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#2021年的新计划&#34;&gt;#&lt;/a&gt; 2021 年的新计划&lt;/h1&gt;
+&lt;div class=&#34;note info&#34;&gt;
+&lt;p&gt;&lt;span class=&#34;spoiler&#34; title=&#34;你知道得太多了&#34;&gt;我觉得很可能大部分都完成不了&lt;/span&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;p&gt;&lt;mark&gt;以下为预定任务&lt;/mark&gt;，&lt;ins class=&#34;dot&#34;&gt;尽量努力完成&lt;/ins&gt;&lt;br /&gt;
+&lt;s class=&#34;danger&#34;&gt;除非大量不可抗力因素&lt;/s&gt;&lt;br /&gt;
+&lt;span class=&#34;label info&#34;&gt;大体计划&lt;/span&gt;&lt;/p&gt;
+&lt;ul class=&#34;task-list&#34;&gt;
+&lt;li class=&#34;task-list-item&#34;&gt;&lt;input type=&#34;checkbox&#34; id=&#34;cbx_0&#34; disabled=&#34;true&#34; /&gt;&lt;label for=&#34;cbx_0&#34;&gt; 最重要的当然是大创项目啦&lt;/label&gt;&lt;/li&gt;
+&lt;li class=&#34;task-list-item&#34;&gt;&lt;input type=&#34;checkbox&#34; id=&#34;cbx_1&#34; disabled=&#34;true&#34; /&gt;&lt;label for=&#34;cbx_1&#34;&gt; 学着做游戏？&lt;span class=&#34;spoiler bulr&#34; title=&#34;你知道得太多了&#34;&gt;如果 UE5 今年出了&lt;/span&gt;&lt;/label&gt;&lt;/li&gt;
+&lt;li class=&#34;task-list-item&#34;&gt;&lt;input type=&#34;checkbox&#34; id=&#34;cbx_2&#34; disabled=&#34;true&#34; /&gt;&lt;label for=&#34;cbx_2&#34;&gt; 啃算法第四版，每周学习一个新算法&lt;/label&gt;&lt;/li&gt;
+&lt;li class=&#34;task-list-item&#34;&gt;&lt;input type=&#34;checkbox&#34; id=&#34;cbx_3&#34; disabled=&#34;true&#34; /&gt;&lt;label for=&#34;cbx_3&#34;&gt; 想去学习计算机图形学&lt;/label&gt;&lt;/li&gt;
+&lt;li class=&#34;task-list-item&#34;&gt;&lt;input type=&#34;checkbox&#34; id=&#34;cbx_4&#34; disabled=&#34;true&#34; /&gt;&lt;label for=&#34;cbx_4&#34;&gt; 想换个轻薄本，大砖头背不动了&lt;/label&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;span class=&#34;label info&#34;&gt;具体实现&lt;/span&gt;&lt;/p&gt;
+&lt;details class=&#34;info&#34;&gt;&lt;summary&gt;大创项目&lt;/summary&gt;&lt;div&gt;
+&lt;div class=&#34;tab&#34; data-id=&#34;id3&#34; data-title=&#34;立项与答辩&#34;&gt;
+&lt;p&gt;&lt;span class=&#34;label danger&#34;&gt;顺利通过&lt;/span&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;tab&#34; data-id=&#34;id3&#34; data-title=&#34;学习Android开发&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;不想开始。。。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class=&#34;tab&#34; data-id=&#34;id3&#34; data-title=&#34;开始开发&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;更没有头绪&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/details&gt;
+&lt;details class=&#34;info&#34;&gt;&lt;summary&gt;做游戏&lt;/summary&gt;&lt;div&gt;
+&lt;ul&gt;
+&lt;li&gt;没出 UE5，没空，再说&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;&lt;/details&gt;
+&lt;details class=&#34;info&#34;&gt;&lt;summary&gt;啃算法&lt;/summary&gt;&lt;div&gt;
+&lt;ul class=&#34;task-list&#34;&gt;
+&lt;li class=&#34;task-list-item&#34;&gt;&lt;input type=&#34;checkbox&#34; id=&#34;cbx_5&#34; disabled=&#34;true&#34; /&gt;&lt;label for=&#34;cbx_5&#34;&gt; 二分查找&lt;/label&gt;&lt;/li&gt;
+&lt;li class=&#34;task-list-item&#34;&gt;&lt;input type=&#34;checkbox&#34; id=&#34;cbx_6&#34; disabled=&#34;true&#34; /&gt;&lt;label for=&#34;cbx_6&#34;&gt; 链表&lt;/label&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;&lt;/details&gt;
+&lt;details class=&#34;info&#34;&gt;&lt;summary&gt;计算机图形学&lt;/summary&gt;&lt;div&gt;
+&lt;ul&gt;
+&lt;li&gt;没开始呢&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;&lt;/details&gt;
+&lt;details class=&#34;info&#34;&gt;&lt;summary&gt;消费&lt;/summary&gt;&lt;div&gt;
+&lt;ul&gt;
+&lt;li&gt;没钱.jpg&lt;/li&gt;
+&lt;li&gt;等暑假吧&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;&lt;/details&gt;
+ ]]></description>
+        </item>
+    </channel>
+</rss>
