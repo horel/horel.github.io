@@ -15,11 +15,14 @@
         <id>http://horel.github.io/notes/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6%E2%80%94%E2%80%94%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</id>
         <title>计算机图形学——学习笔记</title>
         <link rel="alternate" href="http://horel.github.io/notes/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6%E2%80%94%E2%80%94%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
-        <content type="html">&lt;div class=&#34;note info&#34;&gt;
-&lt;p&gt;终于迈出学习计算机图形学的第一步了......&lt;/p&gt;
+        <content type="html">&lt;h1 id=&#34;计算机图形学学习笔记&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#计算机图形学学习笔记&#34;&gt;#&lt;/a&gt; 计算机图形学 —— 学习笔记&lt;/h1&gt;
+&lt;h2 id=&#34;前言&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#前言&#34;&gt;#&lt;/a&gt; 前言&lt;/h2&gt;
+&lt;div class=&#34;note info&#34;&gt;
+&lt;p&gt;&lt;strong&gt;终于迈出学习计算机图形学的第一步了......&lt;/strong&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;p&gt;&lt;ins class=&#34;dot&#34;&gt;喜欢上计算机图形学的起因大概是听了传奇程序员&lt;mark&gt;约翰・卡马克&lt;/mark&gt;的故事，这位推动了 3D 发展的大佬给我留下了无比深刻的印象。&lt;/ins&gt;&lt;/p&gt;
 &lt;p&gt;&lt;s class=&#34;danger&#34;&gt;再加上我对渲染、光追、VR、AR 等等也都很感兴趣，就想去了解更多，于是也就有了这篇记录博客。&lt;/s&gt;&lt;/p&gt;
+&lt;h2 id=&#34;计划第一步games101-现代计算机图形学入门&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#计划第一步games101-现代计算机图形学入门&#34;&gt;#&lt;/a&gt; 计划第一步 ——GAMES101 - 现代计算机图形学入门&lt;/h2&gt;
 &lt;p&gt;&lt;ins class=&#34;wavy&#34;&gt;计划先观看闫令琪大佬的视屏：GAMES101 - 现代计算机图形学入门&lt;/ins&gt;&lt;/p&gt;
 &lt;p&gt;&lt;div class=&#34;links&#34;&gt;&lt;div class=&#34;item&#34; title=&#34;闫令琪&#34; style=&#34;--block-color:#e9546b;&#34;&gt;&lt;span class=&#34;exturl image&#34; data-url=&#34;aHR0cHM6Ly93d3cuYmlsaWJpbGkuY29tL3ZpZGVvL0JWMVg3NDExRjc0ND9mcm9tPXNlYXJjaCZzZWlkPTE2MjI4MzA3NTExNjQ5MTIzNTYw&#34; data-background-image=&#34;https://tva4.sinaimg.cn/large/008ieO5lly8gpxh7gr2ajj308c08c3yp.jpg&#34;&gt;&lt;/span&gt;
           &lt;div class=&#34;info&#34;&gt;
@@ -27,13 +30,22 @@
           &lt;p class=&#34;desc&#34;&gt;闫令琪&lt;/p&gt;
           &lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/p&gt;
 &lt;div class=&#34;note success&#34;&gt;
-&lt;p&gt;&lt;s class=&#34;danger&#34;&gt;从入门到放弃&lt;/s&gt;进度&lt;/p&gt;
+&lt;p&gt;&lt;s class=&#34;danger&#34;&gt;从入门到放弃的&lt;/s&gt;	&lt;strong&gt;进度&lt;/strong&gt;&lt;/p&gt;
 &lt;/div&gt;
+&lt;p&gt;编辑器当然还是用我最喜欢的 VIM	&lt;span class=&#34;spoiler&#34; title=&#34;你知道得太多了&#34;&gt;虽然视屏里的老师及其不推荐，无它，我插件安的多一样好用！&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;开发环境我决定使用实体机，&lt;s class=&#34;danger&#34;&gt;因为不喜欢用虚拟机，尤其是其他发行版的 Linux......&lt;/s&gt;&lt;/p&gt;
+&lt;p&gt;视屏里的作业首先需要下载编译器和两个库，ArchLinux 可以直接执行以下命令安装：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;figcaption data-lang=&#34;bash&#34;&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token function&#34;&gt;sudo&lt;/span&gt; pacman -S eigen opencv gcc cmake&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;p&gt;Eigen 是矩阵库，OpenCV 是视觉和机器学习软件库&lt;/p&gt;
+&lt;p&gt;gcc 的编译器，&lt;em&gt;CMake&lt;/em&gt; 是一个跨平台的安装（编译）工具&lt;/p&gt;
 &lt;ul class=&#34;task-list&#34;&gt;
-&lt;li class=&#34;task-list-item&#34;&gt;&lt;input type=&#34;checkbox&#34; id=&#34;cbx_0&#34; disabled=&#34;true&#34; /&gt;&lt;label for=&#34;cbx_0&#34;&gt; P1——P5&lt;/label&gt;&lt;/li&gt;
-&lt;li class=&#34;task-list-item&#34;&gt;&lt;input type=&#34;checkbox&#34; id=&#34;cbx_1&#34; disabled=&#34;true&#34; /&gt;&lt;label for=&#34;cbx_1&#34;&gt; P5——P22&lt;/label&gt;&lt;/li&gt;
+&lt;li class=&#34;task-list-item&#34;&gt;
+&lt;p&gt;&lt;input type=&#34;checkbox&#34; id=&#34;cbx_0&#34; disabled=&#34;true&#34; /&gt;&lt;label for=&#34;cbx_0&#34;&gt; 作业 1&lt;/label&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li class=&#34;task-list-item&#34;&gt;
+&lt;p&gt;&lt;input type=&#34;checkbox&#34; id=&#34;cbx_1&#34; disabled=&#34;true&#34; /&gt;&lt;label for=&#34;cbx_1&#34;&gt; 作业 2&lt;/label&gt;&lt;/p&gt;
+&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;&lt;span class=&#34;spoiler&#34; title=&#34;你知道得太多了&#34;&gt;不能放弃，坚持！&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;spoiler&#34; title=&#34;你知道得太多了&#34;&gt;不能放弃，坚持！&lt;/span&gt;  &lt;span class=&#34;spoiler&#34; title=&#34;你知道得太多了&#34;&gt;已于 2021-05-17 更新学习&lt;/span&gt;&lt;/p&gt;
 </content>
         <category term="二进制玄学" scheme="http://horel.github.io/categories/notes/" />
         <category term="C++" scheme="http://horel.github.io/tags/C/" />
@@ -48,22 +60,23 @@
 &lt;div class=&#34;note info&#34;&gt;
 &lt;p&gt;薇妹美如画！&lt;/p&gt;
 &lt;/div&gt;
+&lt;p&gt;&lt;span class=&#34;label primary&#34;&gt;紫罗兰永恒花园&lt;/span&gt; &lt;span class=&#34;label info&#34;&gt;薇尔莉特&lt;/span&gt; &lt;span class=&#34;label success&#34;&gt;自动手记人偶&lt;/span&gt; &lt;span class=&#34;label&#34;&gt;救赎&lt;/span&gt; &lt;span class=&#34;label danger&#34;&gt;爱&lt;/span&gt;&lt;/p&gt;
 &lt;div class=&#34;tab&#34; data-id=&#34;id1&#34; data-title=&#34;亲爱的基尔伯特少佐:&#34;&gt;
-&lt;p&gt;  &lt;span class=&#34;pink&#34;&gt;你还好吧，别来无恙吗？现在在哪呢？有没有烦恼呢？&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;  &lt;span class=&#34;blue&#34;&gt;春夏秋冬，四季轮转，只有少佐的季节迟迟不来。&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;  &lt;span class=&#34;orange&#34;&gt;我起初不懂，一点都不懂少佐的心意。可是在少佐赐予我的全新人生中，我能稍微感受到一些了。通过代笔写信，通过我遇见的人们，我相信着，少佐一定还活在某个地方。所以我也要，一直，一直活下去。即使不知道今后会遇见什么，也要一直活下去。&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;  &lt;span class=&#34;red&#34;&gt;如果能再见&lt;/span&gt;&lt;br /&gt;
-  &lt;span class=&#34;aqua&#34;&gt;我想告诉你&lt;/span&gt;&lt;br /&gt;
-  &lt;span class=&#34;blue&#34;&gt;我现在对「爱」也有所理解了&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;pink&#34;&gt;你还好吧，别来无恙吗？现在在哪呢？有没有烦恼呢？&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;blue&#34;&gt;春夏秋冬，四季轮转，只有少佐的季节迟迟不来。&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;orange&#34;&gt;我起初不懂，一点都不懂少佐的心意。可是在少佐赐予我的全新人生中，我能稍微感受到一些了。通过代笔写信，通过我遇见的人们，我相信着，少佐一定还活在某个地方。所以我也要，一直，一直活下去。即使不知道今后会遇见什么，也要一直活下去。&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;red&#34;&gt;如果能再见&lt;/span&gt;&lt;br /&gt;
+&lt;span class=&#34;aqua&#34;&gt;我想告诉你&lt;/span&gt;&lt;br /&gt;
+&lt;span class=&#34;blue&#34;&gt;我现在对「爱」也有所理解了&lt;/span&gt;&lt;/p&gt;
 &lt;p&gt;&lt;div class=&#34;links&#34;&gt;&lt;div class=&#34;item&#34; title=&#34;——没有一封信是不值得送达的&#34; style=&#34;--block-color:#9d5b8b;&#34;&gt;&lt;span class=&#34;exturl image&#34; data-url=&#34;aHR0cHM6Ly93d3cuYmlsaWJpbGkuY29tL2Jhbmd1bWkvcGxheS9lcDE3MzI4Ng==&#34; data-background-image=&#34;https://tva4.sinaimg.cn/large/008ieO5lly8gqbwu0fjchj31hc0u0drh.jpg&#34;&gt;&lt;/span&gt;
           &lt;div class=&#34;info&#34;&gt;
           &lt;span class=&#34;exturl title&#34; data-url=&#34;aHR0cHM6Ly93d3cuYmlsaWJpbGkuY29tL2Jhbmd1bWkvcGxheS9lcDE3MzI4Ng==&#34;&gt;《紫罗兰永恒花园》&lt;/span&gt;
           &lt;p class=&#34;desc&#34;&gt;bilibili《紫罗兰永恒花园》&lt;/p&gt;
           &lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/p&gt;
 &lt;/div&gt;
-&lt;p&gt;  对于我来说，这是我这两年来觉得最棒的也是我最喜欢的作品。紫罗兰永恒花园以爱为主题发挥的淋漓尽致。&lt;/p&gt;
-&lt;p&gt;  战争结束后，原本只是个没有感情的杀人工具的薇尔莉特，第一次进入了人类的社会，她带着最敬爱的少佐的遗愿，开始了学习 “爱” 的意义，最开始，她所有的常识都让她显得与周围格格不入，也处处碰壁，但是周围的人都给与了她足够的宽容与信任，让她能够从零开始，渐渐地萌生了人性，萌生了情感，理解了人心，理解了爱。&lt;br /&gt;
-  直到她在理解这些以后，再次正视了自己沾满鲜血与杀戮的过去，接受了少佐的死，终于浴火重生，成为了一个真正的人，不再依靠少佐的命令，而是自己真正的愿望去生活。&lt;/p&gt;
+&lt;p&gt;对于我来说，这是我这两年来觉得最棒的也是我最喜欢的作品。紫罗兰永恒花园以爱为主题发挥的淋漓尽致。&lt;/p&gt;
+&lt;p&gt;战争结束后，原本只是个没有感情的杀人工具的薇尔莉特，第一次进入了人类的社会，她带着最敬爱的少佐的遗愿，开始了学习 “爱” 的意义，最开始，她所有的常识都让她显得与周围格格不入，也处处碰壁，但是周围的人都给与了她足够的宽容与信任，让她能够从零开始，渐渐地萌生了人性，萌生了情感，理解了人心，理解了爱。&lt;/p&gt;
+&lt;p&gt;直到她在理解这些以后，再次正视了自己沾满鲜血与杀戮的过去，接受了少佐的死，终于浴火重生，成为了一个真正的人，不再依靠少佐的命令，而是自己真正的愿望去生活。&lt;/p&gt;
 &lt;p&gt;&lt;img data-src=&#34;https://tva1.sinaimg.cn/large/008ieO5lly8gqk5gsgubgj30u01kan5v.jpg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
 &lt;div class=&#34;tab&#34; data-id=&#34;id2&#34; data-title=&#34;——《紫罗兰永恒花园》第一话&#34;&gt;
 &lt;p&gt;&lt;span class=&#34;pink&#34;&gt;“你想做自动手记人偶的工作？”&lt;/span&gt;&lt;/p&gt;
