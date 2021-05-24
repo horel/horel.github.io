@@ -72,13 +72,13 @@
 &lt;p&gt;&lt;input type=&#34;checkbox&#34; id=&#34;cbx_5&#34; checked=&#34;true&#34; disabled=&#34;true&#34; /&gt;&lt;label for=&#34;cbx_5&#34;&gt; P6	 光栅化 (反走样、深度缓冲)、Artifacts、先做模糊 (滤波) 再采样、时域的卷积 = 频域的乘积、MSAA (多重采样抗锯齿，同一像素增加了采样点)、FXAA (快速近似抗锯齿，不是采样，先模糊，再替换边界锯齿)、TAA (时间近似抗锯齿，复用上一帧)、Super resolution (超分辨率)、DLSS &lt;span class=&#34;spoiler&#34; title=&#34;你知道得太多了&#34;&gt;深度学习 == 猜，淦&lt;/span&gt;&lt;/label&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li class=&#34;task-list-item&#34;&gt;
-&lt;p&gt;&lt;input type=&#34;checkbox&#34; id=&#34;cbx_6&#34; checked=&#34;true&#34; disabled=&#34;true&#34; /&gt;&lt;label for=&#34;cbx_6&#34;&gt; P7     可见性遮挡 (深度缓存)、着色、画家算法、Z-Buffer (例如深度一样游戏会闪就是)、shading (着色不同材质)、漫反射&lt;/label&gt;&lt;/p&gt;
+&lt;p&gt;&lt;input type=&#34;checkbox&#34; id=&#34;cbx_6&#34; checked=&#34;true&#34; disabled=&#34;true&#34; /&gt;&lt;label for=&#34;cbx_6&#34;&gt; P7     可见性遮挡 (深度缓存)、着色、画家算法、Z-Buffer (例如深度一样游戏会闪就是)、shading (着色不同材质)、漫反射 (和观测方向无关)&lt;/label&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li class=&#34;task-list-item&#34;&gt;
-&lt;p&gt;&lt;input type=&#34;checkbox&#34; id=&#34;cbx_7&#34; disabled=&#34;true&#34; /&gt;&lt;label for=&#34;cbx_7&#34;&gt; P8&lt;/label&gt;&lt;/p&gt;
+&lt;p&gt;&lt;input type=&#34;checkbox&#34; id=&#34;cbx_7&#34; checked=&#34;true&#34; disabled=&#34;true&#34; /&gt;&lt;label for=&#34;cbx_7&#34;&gt; P8     Blinn-Phong 着色模型、高光 (半程向量和法向量是否足够接近，余弦的指数一般用 100——200)、环境光 (大胆假设：常数)、着色频率 (每个面片、顶点、像素)、实时渲染 (图形) 管线、shader (着色器)、纹理映射&lt;/label&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li class=&#34;task-list-item&#34;&gt;
-&lt;p&gt;&lt;input type=&#34;checkbox&#34; id=&#34;cbx_8&#34; disabled=&#34;true&#34; /&gt;&lt;label for=&#34;cbx_8&#34;&gt; P9&lt;/label&gt;&lt;/p&gt;
+&lt;p&gt;&lt;input type=&#34;checkbox&#34; id=&#34;cbx_8&#34; disabled=&#34;true&#34; /&gt;&lt;label for=&#34;cbx_8&#34;&gt; P9     纹理的应用、重心坐标插值 (为得到顶点间平滑的过度)、纹理贴图&lt;/label&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li class=&#34;task-list-item&#34;&gt;
 &lt;p&gt;&lt;input type=&#34;checkbox&#34; id=&#34;cbx_9&#34; disabled=&#34;true&#34; /&gt;&lt;label for=&#34;cbx_9&#34;&gt; P10&lt;/label&gt;&lt;/p&gt;
@@ -145,7 +145,7 @@
 &lt;p&gt;&lt;input type=&#34;checkbox&#34; id=&#34;cbx_24&#34; checked=&#34;true&#34; disabled=&#34;true&#34; /&gt;&lt;label for=&#34;cbx_24&#34;&gt; 作业 1    人类迷惑行为？代公式，懂了&lt;/label&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li class=&#34;task-list-item&#34;&gt;
-&lt;p&gt;&lt;input type=&#34;checkbox&#34; id=&#34;cbx_25&#34; disabled=&#34;true&#34; /&gt;&lt;label for=&#34;cbx_25&#34;&gt; 作业 2    怀疑智商...&lt;/label&gt;&lt;/p&gt;
+&lt;p&gt;&lt;input type=&#34;checkbox&#34; id=&#34;cbx_25&#34; checked=&#34;true&#34; disabled=&#34;true&#34; /&gt;&lt;label for=&#34;cbx_25&#34;&gt; 作业 2    怀疑智商... 难度突然提升好多。模型、视窗、透视投影、视口&lt;/label&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li class=&#34;task-list-item&#34;&gt;
 &lt;p&gt;&lt;input type=&#34;checkbox&#34; id=&#34;cbx_26&#34; disabled=&#34;true&#34; /&gt;&lt;label for=&#34;cbx_26&#34;&gt; 作业 3&lt;/label&gt;&lt;/p&gt;
@@ -163,7 +163,7 @@
 &lt;p&gt;&lt;input type=&#34;checkbox&#34; id=&#34;cbx_30&#34; disabled=&#34;true&#34; /&gt;&lt;label for=&#34;cbx_30&#34;&gt; 作业 7&lt;/label&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;&lt;span class=&#34;spoiler&#34; title=&#34;你知道得太多了&#34;&gt;不能放弃，坚持！&lt;/span&gt;  &lt;span class=&#34;spoiler&#34; title=&#34;你知道得太多了&#34;&gt;已于 2021-05-21 更新学习&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;spoiler&#34; title=&#34;你知道得太多了&#34;&gt;不能放弃，坚持！&lt;/span&gt;  &lt;span class=&#34;spoiler&#34; title=&#34;你知道得太多了&#34;&gt;已于 2021-05-24 更新学习&lt;/span&gt;&lt;/p&gt;
  ]]></description>
         </item>
         <item>
