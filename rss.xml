@@ -406,7 +406,7 @@
 &lt;span class=&#34;label info&#34;&gt;大体计划&lt;/span&gt;&lt;/p&gt;
 &lt;ul class=&#34;task-list&#34;&gt;
 &lt;li class=&#34;task-list-item&#34;&gt;&lt;input type=&#34;checkbox&#34; id=&#34;cbx_0&#34; disabled=&#34;true&#34; /&gt;&lt;label for=&#34;cbx_0&#34;&gt; 最重要的当然是大创项目啦&lt;/label&gt;&lt;/li&gt;
-&lt;li class=&#34;task-list-item&#34;&gt;&lt;input type=&#34;checkbox&#34; id=&#34;cbx_1&#34; disabled=&#34;true&#34; /&gt;&lt;label for=&#34;cbx_1&#34;&gt; 学着做游戏？&lt;span class=&#34;spoiler bulr&#34; title=&#34;你知道得太多了&#34;&gt;如果 UE5 今年出了&lt;/span&gt;&lt;/label&gt;&lt;/li&gt;
+&lt;li class=&#34;task-list-item&#34;&gt;&lt;input type=&#34;checkbox&#34; id=&#34;cbx_1&#34; disabled=&#34;true&#34; /&gt;&lt;label for=&#34;cbx_1&#34;&gt; 学着做游戏？&lt;span class=&#34;spoiler bulr&#34; title=&#34;你知道得太多了&#34;&gt;&lt;s&gt;如果 UE5 今年出了&lt;/s&gt;，5.26 日，已经出了&lt;/span&gt;&lt;/label&gt;&lt;/li&gt;
 &lt;li class=&#34;task-list-item&#34;&gt;&lt;input type=&#34;checkbox&#34; id=&#34;cbx_2&#34; disabled=&#34;true&#34; /&gt;&lt;label for=&#34;cbx_2&#34;&gt; 啃算法第四版，每周学习一个新算法&lt;/label&gt;&lt;/li&gt;
 &lt;li class=&#34;task-list-item&#34;&gt;&lt;input type=&#34;checkbox&#34; id=&#34;cbx_3&#34; disabled=&#34;true&#34; /&gt;&lt;label for=&#34;cbx_3&#34;&gt; 想去学习计算机图形学&lt;/label&gt;&lt;/li&gt;
 &lt;li class=&#34;task-list-item&#34;&gt;&lt;input type=&#34;checkbox&#34; id=&#34;cbx_4&#34; disabled=&#34;true&#34; /&gt;&lt;label for=&#34;cbx_4&#34;&gt; 想换个轻薄本，大砖头背不动了&lt;/label&gt;&lt;/li&gt;
@@ -429,7 +429,8 @@
 &lt;/div&gt;&lt;/details&gt;
 &lt;details class=&#34;info&#34;&gt;&lt;summary&gt;做游戏&lt;/summary&gt;&lt;div&gt;
 &lt;ul&gt;
-&lt;li&gt;没出 UE5，没空，再说&lt;/li&gt;
+&lt;li&gt;&lt;s&gt;没出 UE5，没空，再说&lt;/s&gt;&lt;/li&gt;
+&lt;li&gt;5 月 26 日，UE5 更新了，呜呜呜呜呜呜，要学的好多&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;&lt;/details&gt;
 &lt;details class=&#34;info&#34;&gt;&lt;summary&gt;啃算法&lt;/summary&gt;&lt;div&gt;
@@ -452,6 +453,7 @@
 &lt;h2 id=&#34;留言版&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#留言版&#34;&gt;#&lt;/a&gt; 留言版&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;5 - 24	计算机图形学太太太难了，终于看到 GAMES101 的 P10，闫令琪 yyds！&lt;/li&gt;
+&lt;li&gt;5 - 26    虚幻 5 终于出了！哦哦哦哦哦哦哦～，周末就下源码编译试试预览版&lt;/li&gt;
 &lt;/ul&gt;
  ]]></description>
         </item>
