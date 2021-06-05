@@ -71,10 +71,10 @@
 &lt;p&gt;&lt;input type=&#34;checkbox&#34; id=&#34;cbx_7&#34; checked=&#34;true&#34; disabled=&#34;true&#34; /&gt;&lt;label for=&#34;cbx_7&#34;&gt; P8     Blinn-Phong 着色模型、高光 (半程向量和法向量是否足够接近，余弦的指数一般用 100——200)、环境光 (大胆假设：常数)、着色频率 (每个面片、顶点、像素)、实时渲染 (图形) 管线、shader (着色器)、纹理映射&lt;/label&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li class=&#34;task-list-item&#34;&gt;
-&lt;p&gt;&lt;input type=&#34;checkbox&#34; id=&#34;cbx_8&#34; disabled=&#34;true&#34; /&gt;&lt;label for=&#34;cbx_8&#34;&gt; P9     纹理的应用、重心坐标插值 (为得到顶点间平滑的过度)、纹理贴图&lt;/label&gt;&lt;/p&gt;
+&lt;p&gt;&lt;input type=&#34;checkbox&#34; id=&#34;cbx_8&#34; checked=&#34;true&#34; disabled=&#34;true&#34; /&gt;&lt;label for=&#34;cbx_8&#34;&gt; P9     纹理的应用、重心坐标插值 (为得到顶点间平滑的过度)、纹理贴图 (纹理低分辨率时 Bilinear 双线性插值)、双向三阶插值 (Bicubic)、纹理太大会丢失细节 (又是走样！)、Mipmap (范围查询、只能近似方形)、log2 L、三线性插值 (纹理内部双线性插值，Mipmap 层之间插值) 得到连续的图、Overblur (Mipmap 用了近似)、各向异性过滤 (矩形区域)&lt;/label&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li class=&#34;task-list-item&#34;&gt;
-&lt;p&gt;&lt;input type=&#34;checkbox&#34; id=&#34;cbx_9&#34; disabled=&#34;true&#34; /&gt;&lt;label for=&#34;cbx_9&#34;&gt; P10&lt;/label&gt;&lt;/p&gt;
+&lt;p&gt;&lt;input type=&#34;checkbox&#34; id=&#34;cbx_9&#34; disabled=&#34;true&#34; /&gt;&lt;label for=&#34;cbx_9&#34;&gt; P10    环境光照 (环境光纹理)、cubemap、凹凸贴图、位移贴图、几何？？？&lt;/label&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
@@ -156,7 +156,11 @@
 &lt;p&gt;&lt;input type=&#34;checkbox&#34; id=&#34;cbx_30&#34; disabled=&#34;true&#34; /&gt;&lt;label for=&#34;cbx_30&#34;&gt; 作业 7&lt;/label&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;&lt;span class=&#34;spoiler&#34; title=&#34;你知道得太多了&#34;&gt;不能放弃，坚持！&lt;/span&gt;  &lt;span class=&#34;spoiler&#34; title=&#34;你知道得太多了&#34;&gt;已于 2021-05-24 更新学习&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;!! 不能放弃，坚持！&lt;/p&gt;
+&lt;h2 id=&#34;学习更新记录&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#学习更新记录&#34;&gt;#&lt;/a&gt; 学习更新记录&lt;/h2&gt;
+&lt;p&gt;&lt;span class=&#34;spoiler&#34; title=&#34;你知道得太多了&#34;&gt;2021-05-24&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;spoiler&#34; title=&#34;你知道得太多了&#34;&gt;2021-05-30&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;没啥好的记笔记方法，等一波小米的平板出了再继续学习。。。&lt;/p&gt;
 </content>
         <category term="二进制玄学" scheme="http://horel.github.io/categories/notes/" />
         <category term="C++" scheme="http://horel.github.io/tags/C/" />
