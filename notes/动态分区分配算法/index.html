@@ -1,0 +1,738 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=2"><meta name="theme-color" content="#FFF"><link rel="apple-touch-icon" sizes="180x180" href="//cdn.jsdelivr.net/gh/horel/horel.github.io@latest/images/apple-touch-icon.png"><link rel="icon" type="image/ico" sizes="32x32" href="//cdn.jsdelivr.net/gh/horel/horel.github.io@latest/images/favicon.ico"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link rel="alternate" type="application/rss+xml" title="隙驹" href="http://horel.github.io/rss.xml"><link rel="alternate" type="application/atom+xml" title="隙驹" href="http://horel.github.io/atom.xml"><link rel="alternate" type="application/json" title="隙驹" href="http://horel.github.io/feed.json"><link rel="stylesheet" href="//fonts.googleapis.com/css?family=Mulish:300,300italic,400,400italic,700,700italic%7CFredericka%20the%20Great:300,300italic,400,400italic,700,700italic%7CNoto%20Serif%20JP:300,300italic,400,400italic,700,700italic%7CNoto%20Serif%20SC:300,300italic,400,400italic,700,700italic%7CInconsolata:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext"><link rel="stylesheet" href="//cdn.jsdelivr.net/gh/horel/horel.github.io@latest/css/app.css?v=0.2.5"><meta name="keywords" content="操作系统,C++"><link rel="canonical" href="http://horel.github.io/notes/%E5%8A%A8%E6%80%81%E5%88%86%E5%8C%BA%E5%88%86%E9%85%8D%E7%AE%97%E6%B3%95/"><title>动态分区分配算法 - 二进制玄学 | 栖迟於一丘 = 隙驹 = 攻城狮不是工程师</title><meta name="generator" content="Hexo 5.4.0"></head><body itemscope itemtype="http://schema.org/WebPage"><div id="loading"><div class="cat"><div class="body"></div><div class="head"><div class="face"></div></div><div class="foot"><div class="tummy-end"></div><div class="bottom"></div><div class="legs left"></div><div class="legs right"></div></div><div class="paw"><div class="hands left"></div><div class="hands right"></div></div></div></div><div id="container"><header id="header" itemscope itemtype="http://schema.org/WPHeader"><div class="inner"><div id="brand"><div class="pjax"><h1 itemprop="name headline">动态分区分配算法</h1><div class="meta"><span class="item" title="创建时间：2021-06-12 20:21:58"><span class="icon"><i class="ic i-calendar"></i> </span><span class="text">发表于</span> <time itemprop="dateCreated datePublished" datetime="2021-06-12T20:21:58+08:00">2021-06-12</time> </span><span class="item" title="本文字数"><span class="icon"><i class="ic i-pen"></i> </span><span class="text">本文字数</span> <span>16k</span> <span class="text">字</span> </span><span class="item" title="阅读时长"><span class="icon"><i class="ic i-clock"></i> </span><span class="text">阅读时长</span> <span>14 分钟</span></span></div></div></div><nav id="nav"><div class="inner"><div class="toggle"><div class="lines" aria-label="切换导航栏"><span class="line"></span> <span class="line"></span> <span class="line"></span></div></div><ul class="menu"><li class="item title"><a href="/" rel="start">栖迟於一丘</a></li></ul><ul class="right"><li class="item theme"><i class="ic i-sun"></i></li><li class="item search"><i class="ic i-search"></i></li></ul></div></nav></div><div id="imgs" class="pjax"><ul><li class="item" data-background-image="https://tva2.sinaimg.cn/large/6833939bly1giclxxcb6rj20zk0m8b29.jpg"></li><li class="item" data-background-image="https://tva2.sinaimg.cn/large/6833939bly1gipeuv80yoj20zk0m8kjl.jpg"></li><li class="item" data-background-image="https://tva2.sinaimg.cn/large/6833939bly1giclh5u05ej20zk0m87df.jpg"></li><li class="item" data-background-image="https://tva2.sinaimg.cn/large/6833939bly1giph4lm9i7j20zk0m84qp.jpg"></li><li class="item" data-background-image="https://tva2.sinaimg.cn/large/6833939bly1giciuv0socj20zk0m8qes.jpg"></li><li class="item" data-background-image="https://tva2.sinaimg.cn/large/6833939bly1gipexe4oykj20zk0m87ji.jpg"></li></ul></div></header><div id="waves"><svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z"/></defs><g class="parallax"><use xlink:href="#gentle-wave" x="48" y="0"/><use xlink:href="#gentle-wave" x="48" y="3"/><use xlink:href="#gentle-wave" x="48" y="5"/><use xlink:href="#gentle-wave" x="48" y="7"/></g></svg></div><main><div class="inner"><div id="main" class="pjax"><div class="article wrap"><div class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList"><i class="ic i-home"></i> <span><a href="/">首页</a></span><i class="ic i-angle-right"></i> <span class="current" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><a href="/categories/notes/" itemprop="item" rel="index" title="分类于 二进制玄学"><span itemprop="name">二进制玄学</span></a><meta itemprop="position" content="1"></span></div><article itemscope itemtype="http://schema.org/Article" class="post block" lang="zh-CN"><link itemprop="mainEntityOfPage" href="http://horel.github.io/notes/%E5%8A%A8%E6%80%81%E5%88%86%E5%8C%BA%E5%88%86%E9%85%8D%E7%AE%97%E6%B3%95/"><span hidden itemprop="author" itemscope itemtype="http://schema.org/Person"><meta itemprop="image" content="//cdn.jsdelivr.net/gh/horel/horel.github.io@latest/images/avatar.jpg"><meta itemprop="name" content="隙驹"><meta itemprop="description" content="攻城狮不是工程师, = 攻城狮不是工程师 ="></span><span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization"><meta itemprop="name" content="隙驹"></span><div class="body md" itemprop="articleBody"><ul><li>首次适应算法 FF</li><li>循环首次适应算法 NF</li><li>最佳适应算法 BF</li><li>最差适应算法 WF</li></ul><pre><code class="language-c++">#include &lt;malloc.h&gt;
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+#define PROCESS_NAME_LEN 32   //进程名字长度
+#define MIN_SLICE 10          //最小碎片大小
+#define DEFAULT_MEM_SIZE 1024 // 默认的内存大小
+#define DEFAULT_MEM_START 0   //起始地址
+
+#define MA_FF 1 //首次适应算法
+#define MA_BF 2 //最佳适应算法
+#define MA_WF 3 //最坏适应算法
+#define MA_NF 4 //临近适应算法（循环首次适应算法）
+
+//空闲分区的结构体
+typedef struct free_block_type &#123;
+    int size;
+    int start_addr;
+    struct free_block_type *next;
+&#125; free_block_type;
+/*指向内存中空闲块链表的首指针*/
+free_block_type *free_block;
+
+//已分配分区的结构体
+typedef struct allocated_block &#123;
+    int pid;
+    int size;
+    int start_addr;
+    char process_name[PROCESS_NAME_LEN];
+    struct allocated_block *next;
+&#125; allocated_block;
+//进程分配内存块链表的首指针
+struct allocated_block *allocated_block_head = NULL;
+
+int mem_size = DEFAULT_MEM_SIZE;    // 内存大小
+int ma_algorithm = MA_FF;   // 动态分区分配算法
+static int pid = 0;     //  进程号
+int flag = 0;   // 判断内存是否被修改标志
+
+//函数声明
+void display_menu();    // 显示主菜单
+int set_mem_size();     // 设置内存大小
+void set_algorithm();   // 选择当前算法
+void rearrange(int algorithm);  // 为每一个进程分配完内存以后重新按已选择的算法再次排序
+int new_process();      // 创建一个新的进程
+int allocate_mem(struct allocated_block *ab);   // 内存分配
+void kill_process();    // 杀死进程
+int free_mem(struct allocated_block *ab);       // 释放杀死进程的内存块
+int dispose(struct allocated_block *free_ab);   // 销毁杀死进程的结点
+int display_mem_usage();    // 显示内存使用情况
+allocated_block *find_process(int pid);         // 找到要杀死的进程的标号
+void rearrange_FF();    // 首次适应算法
+void rearrange_BF();    // 最佳适应算法
+void rearrange_WF();    // 最坏适应算法
+void rearrange_NF();    // 临近适应算法（循环首次适应算法）
+
+//初始化空闲分区
+free_block_type *init_free_block(int mem_size) &#123;
+    free_block_type *fb;
+    fb = (free_block_type *)malloc(sizeof(free_block_type));
+    if (fb == NULL) &#123;
+        printf(&quot;No mem\n&quot;);
+        return NULL;
+    &#125;
+    fb-&gt;size = mem_size;
+    fb-&gt;start_addr = DEFAULT_MEM_START;
+    fb-&gt;next = NULL;
+    return fb;
+&#125;
+
+//显示主菜单
+void display_menu() &#123;
+    printf(&quot;\n&quot;);
+    printf(&quot;1 - Set memory size (default=%d)\n&quot;, DEFAULT_MEM_SIZE);
+    printf(&quot;2 - Select memory allocation algorithm\n&quot;);
+    printf(&quot;3 - New process \n&quot;);
+    printf(&quot;4 - Terminate a process \n&quot;);
+    printf(&quot;5 - Display memory usage \n&quot;);
+    printf(&quot;0 - Exit\n&quot;);
+&#125;
+
+/*设置内存大小*/
+int set_mem_size() &#123;
+    int size;
+    if (flag != 0) &#123; /*flag标志防止内存被再次设置*/
+        printf(&quot;Cannot set memory size again\n&quot;);
+        return 0;
+    &#125;
+    printf(&quot;Total memory size =&quot;);
+    scanf(&quot;%d&quot;, &amp;size);
+    if (size &gt; 0) &#123;
+        mem_size = size;
+        free_block-&gt;size = mem_size; /*设置初始大小为 1024*/
+    &#125;
+    flag = 1;
+    return 1;
+&#125;
+/*选择当前算法*/
+void set_algorithm() &#123;
+    int algorithm;
+    printf(&quot;\t1 - First Fit\n&quot;);
+    printf(&quot;\t2 - Best Fit \n&quot;);
+    printf(&quot;\t3 - Worst Fit \n&quot;);
+    printf(&quot;\t4 - Next Fit\n&quot;);
+    printf(&quot;Please input your choice : &quot;);
+    scanf(&quot;%d&quot;, &amp;algorithm);
+    if (algorithm &gt;= 1 &amp;&amp; algorithm &lt;= 4)
+        ma_algorithm = algorithm;
+
+    rearrange(ma_algorithm);
+&#125;
+
+/*为每一个进程分配完内存以后重新按已选择的算法再次排序*/
+void rearrange(int algorithm) &#123;
+    switch (algorithm) &#123;
+    case MA_FF:
+        rearrange_FF();
+        break;
+    case MA_BF:
+        rearrange_BF();
+        break;
+    case MA_WF:
+        rearrange_WF();
+        break;
+    case MA_NF:
+        rearrange_NF();
+        break;
+    &#125;
+&#125;
+
+/*首次适应算法，按地址的大小由小到大排序*/
+void rearrange_FF() &#123;
+    free_block_type *temp, *p = NULL;
+    free_block_type *head = NULL;
+    int current_min_addr;
+
+    if (free_block) &#123;
+        temp = free_block;
+        current_min_addr = free_block-&gt;start_addr;
+        while (temp-&gt;next != NULL) &#123;
+            if (temp-&gt;next-&gt;start_addr &lt; current_min_addr) &#123;
+                current_min_addr = temp-&gt;next-&gt;start_addr;
+                p = temp;
+            &#125;
+            temp = temp-&gt;next;
+        &#125;
+        if (p != NULL) &#123;
+            temp = p-&gt;next;
+            p-&gt;next = p-&gt;next-&gt;next;
+            temp-&gt;next = free_block;
+            free_block = temp;
+        &#125;
+        head = free_block;
+        p = head;
+        temp = head-&gt;next;
+        while (head-&gt;next != NULL) &#123;
+            current_min_addr = head-&gt;next-&gt;start_addr;
+            while (temp-&gt;next != NULL) &#123;
+                if (temp-&gt;next-&gt;start_addr &lt; current_min_addr) &#123;
+                    current_min_addr = temp-&gt;next-&gt;start_addr;
+                    p = temp;
+                &#125;
+                temp = temp-&gt;next;
+            &#125;
+            if (p-&gt;next != head-&gt;next) &#123;
+                temp = p-&gt;next;
+                p-&gt;next = p-&gt;next-&gt;next;
+                temp-&gt;next = head-&gt;next;
+                head-&gt;next = temp;
+            &#125;
+            head = head-&gt;next;
+            temp = head-&gt;next;
+            p = head;
+        &#125;
+    &#125;
+    return;
+&#125;
+
+/*最佳适应算法，按内存块的大小由小到大排序*/
+void rearrange_BF() &#123;
+    free_block_type *temp, *p = NULL;
+    free_block_type *head = NULL;
+    int current_min_size = free_block-&gt;size;
+
+    temp = free_block;
+    while (temp-&gt;next != NULL) &#123;
+        if (temp-&gt;next-&gt;size &lt; current_min_size) &#123;
+            current_min_size = temp-&gt;next-&gt;size;
+            p = temp;
+        &#125;
+        temp = temp-&gt;next;
+    &#125;
+    if (p != NULL) &#123;
+        temp = p-&gt;next;
+        p-&gt;next = p-&gt;next-&gt;next;
+        temp-&gt;next = free_block;
+        free_block = temp;
+    &#125;
+    head = free_block;
+    p = head;
+    temp = head-&gt;next;
+    while (head-&gt;next != NULL) &#123;
+        current_min_size = head-&gt;next-&gt;size;
+        while (temp-&gt;next != NULL) &#123;
+            if (temp-&gt;next-&gt;size &lt; current_min_size) &#123;
+                current_min_size = temp-&gt;next-&gt;size;
+                p = temp;
+            &#125;
+            temp = temp-&gt;next;
+        &#125;
+        if (p-&gt;next != head-&gt;next) &#123;
+            temp = p;
+            p-&gt;next = p-&gt;next-&gt;next;
+            temp-&gt;next = head-&gt;next;
+            head-&gt;next = temp;
+        &#125;
+        head = head-&gt;next;
+        temp = head-&gt;next;
+        p = head;
+    &#125;
+&#125;
+
+/*最坏适应算法，按地址块的大小从大到小排序*/
+void rearrange_WF() &#123;
+    free_block_type *temp, *p = NULL;
+    free_block_type *head = NULL;
+    int current_max_size = free_block-&gt;size;
+    temp = free_block;
+    while (temp-&gt;next != NULL) &#123;
+        if (temp-&gt;next-&gt;size &gt; current_max_size) &#123;
+            current_max_size = temp-&gt;next-&gt;size;
+            p = temp;
+        &#125;
+        temp = temp-&gt;next;
+    &#125;
+    if (p != NULL) &#123;
+        temp = p;
+        p-&gt;next = p-&gt;next-&gt;next;
+        temp-&gt;next = free_block;
+        free_block = temp;
+    &#125;
+    head = free_block;
+    p = head;
+    temp = head-&gt;next;
+    while (head-&gt;next != NULL) &#123;
+        current_max_size = head-&gt;next-&gt;size;
+        while (temp-&gt;next != NULL) &#123;
+            if (temp-&gt;next-&gt;size &gt; current_max_size) &#123;
+                current_max_size = temp-&gt;next-&gt;size;
+                p = temp;
+            &#125;
+            temp = temp-&gt;next;
+        &#125;
+        if (p-&gt;next != head-&gt;next) &#123;
+            temp = p-&gt;next;
+            p-&gt;next = p-&gt;next-&gt;next;
+            temp-&gt;next = head-&gt;next;
+            head-&gt;next = temp;
+        &#125;
+        head = head-&gt;next;
+        temp = head-&gt;next;
+        p = head;
+    &#125;
+    return;
+&#125;
+
+// 临近适应算法（循环首次适应算法）
+struct free_block_type *NF_tmp = NULL;
+void rearrange_NF()&#123;
+    free_block_type *temp, *p = NULL;
+    free_block_type *head = NULL;
+    int current_min_addr;
+
+    if (free_block) &#123;
+        temp = free_block;
+        current_min_addr = free_block-&gt;start_addr;
+        // 找到最小的地址
+        while (temp-&gt;next != NULL) &#123;
+            if (temp-&gt;next-&gt;start_addr &lt; current_min_addr) &#123;
+                current_min_addr = temp-&gt;next-&gt;start_addr;
+                p = temp;
+            &#125;
+            temp = temp-&gt;next;
+        &#125; // 让最小的地址成为空闲内存链表头
+        if (p != NULL) &#123;
+            temp = p-&gt;next;
+            p-&gt;next = p-&gt;next-&gt;next;
+            temp-&gt;next = free_block;
+            free_block = temp;
+        &#125;
+        head = free_block;
+        p = head;
+        temp = head-&gt;next;
+        while (head-&gt;next != NULL) &#123;    // 从头开始向后遍历，把最小的地址的内存逐次接起来
+            current_min_addr = head-&gt;next-&gt;start_addr;
+            while (temp-&gt;next != NULL) &#123;    // 找到剩余最小的地址的内存
+                if (temp-&gt;next-&gt;start_addr &lt; current_min_addr) &#123;
+                    current_min_addr = temp-&gt;next-&gt;start_addr;
+                    p = temp;
+                &#125;
+                temp = temp-&gt;next;
+            &#125;
+            if (p-&gt;next != head-&gt;next) &#123;    // 把找到的最小的接起来
+                temp = p-&gt;next;
+                p-&gt;next = p-&gt;next-&gt;next;
+                temp-&gt;next = head-&gt;next;
+                head-&gt;next = temp;      // 接上新的较小的头
+            &#125; 
+            head = head-&gt;next;  // 继续向后遍历
+            temp = head-&gt;next;
+            p = head;
+        &#125;
+    &#125;
+    return;
+&#125;
+
+
+//创建一个新的进程
+int new_process() &#123;
+    struct allocated_block *ab;
+    int size;
+    int ret;
+    ab = (struct allocated_block *)malloc(sizeof(struct allocated_block));
+    if (!ab)
+        exit(-5);
+    ab-&gt;next = NULL;
+    pid++;
+    sprintf(ab-&gt;process_name, &quot;PROCESS-%02d&quot;, pid);
+    ab-&gt;pid = pid;
+    printf(&quot;Memory for %s:&quot;, ab-&gt;process_name);
+    printf(&quot;Please input you want to allocate process' size : &quot;);
+    scanf(&quot;%d&quot;, &amp;size);
+    if (size &gt; 0) &#123;
+
+        ab-&gt;size = size;
+    &#125;
+    ret = allocate_mem(ab);
+    if ((ret == 1) &amp;&amp; (allocated_block_head == NULL)) &#123;
+        allocated_block_head = ab;
+        return 1;
+    &#125;
+
+    else if (ret == 1) &#123;
+        ab-&gt;next = allocated_block_head;
+        allocated_block_head = ab;
+        return 2;
+    &#125; else if (ret == -1) &#123;
+        printf(&quot;Allocation fail\n&quot;);
+        pid--;
+        free(ab);
+        return -1;
+    &#125;
+    return 3;
+&#125;
+
+// NF专属内存分配
+int allocate_mem_NF(struct allocated_block *ab, int ab_size) &#123;
+    struct free_block_type *fbt, *pre, *temp, *work, *F = NULL;
+    int request_size = ab_size;
+    // 与上一次位置有关
+    if (NF_tmp == free_block || NF_tmp == NULL) &#123; // 从头或者首次分配
+        F = NULL;
+        NF_tmp = free_block;
+    &#125; else
+        F = NF_tmp;     // F记录保存上次位置，作为循环判断条件
+    fbt = NF_tmp;
+    pre = fbt;
+    do &#123;
+        if (F != NULL &amp;&amp; fbt == NULL)
+            fbt = free_block;
+        if (fbt-&gt;size &gt;= request_size) &#123;
+            NF_tmp = fbt;
+            if (fbt-&gt;size - request_size &gt;= MIN_SLICE) &#123;    /*分配后空闲空间足够大，则分割*/
+                // mem_size -= request_size;
+                fbt-&gt;size -= request_size;
+                ab-&gt;start_addr = fbt-&gt;start_addr;
+                fbt-&gt;start_addr += request_size;
+                NF_tmp = fbt;   // 重新记录分配位置
+            &#125; else if ((fbt-&gt;size - request_size) &lt; MIN_SLICE) &#123;                /*分割后空闲区成为小碎片，一起分配*/
+                // mem_size -= fbt-&gt;size;
+                if (pre == free_block)
+                    free_block = fbt-&gt;next;
+                else if (pre == fbt)
+                    for (pre = free_block; pre-&gt;next != NULL; pre = pre-&gt;next)
+                        if (pre-&gt;next == fbt)
+                            break;
+                pre-&gt;next = fbt-&gt;next;
+                NF_tmp = fbt-&gt;next;     // 重新记录分配位置
+                ab-&gt;start_addr = fbt-&gt;start_addr;
+                ab-&gt;size = fbt-&gt;size;
+                free(fbt);
+            &#125; else &#123;
+                temp = free_block;
+                while (temp != NULL) &#123;
+                    work = temp-&gt;next;
+
+                    if (work != NULL) &#123;     /*如果当前空闲区与后面的空闲区相连，则合并*/
+                        if (temp-&gt;start_addr + temp-&gt;size == work-&gt;start_addr) &#123;
+                            temp-&gt;size += work-&gt;size;
+                            temp-&gt;next = work-&gt;next;
+                            if (NF_tmp == work)
+                                NF_tmp = temp;
+                            free(work);
+                            continue;
+                        &#125;
+                    &#125;
+
+                    temp = temp-&gt;next;
+                &#125;
+                rearrange(ma_algorithm); /*重新按当前的算法排列空闲区*/
+            &#125;
+            return 1;
+        &#125;
+        pre = fbt;
+        fbt = fbt-&gt;next;
+    &#125; while (fbt != F);     // 判断fbt是否循环完一圈
+    return -1;
+&#125;
+
+//内存分配
+int allocate_mem(struct allocated_block *ab) &#123;
+    if(ma_algorithm == MA_NF) &#123;
+        return allocate_mem_NF(ab, ab-&gt;size);
+    &#125;
+    free_block_type *fbt, *pre;
+    free_block_type *temp, *p, *p1;
+    allocated_block *q;
+    int request_size = ab-&gt;size;
+    int sum = 0;
+    int max;
+    fbt = pre = free_block;
+    // 若有空闲内存
+    if (fbt) &#123;
+        if (ma_algorithm == MA_WF) &#123;
+            // 若是最坏适应算法且最大的空闲内存也不够
+            if (fbt == NULL || fbt-&gt;size &lt; request_size)
+                return -1;
+        &#125; else &#123;    // 若不是WF则是由小到大排列，遍历空闲内存寻找需要的大小
+            while (fbt != NULL &amp;&amp; fbt-&gt;size &lt; request_size) &#123;
+                pre = fbt;
+                fbt = fbt-&gt;next;
+            &#125;
+        &#125; // 遍历完仍旧找不到
+        if (fbt == NULL || fbt-&gt;size &lt; request_size) &#123;
+            if (free_block-&gt;next != NULL) &#123;     // 将剩余内存空间相加看是否足够
+                sum = free_block-&gt;size;
+                temp = free_block-&gt;next;
+                while (temp != NULL) &#123;
+                    sum += temp-&gt;size;
+                    if (sum &gt;= request_size)
+                        break;
+                    temp = temp-&gt;next;
+                &#125;
+                if (temp == NULL) // 还不够，退出
+                    return -1;
+                else &#123;  // 足够
+                    pre = free_block;
+                    max = free_block-&gt;start_addr;
+                    fbt = free_block;
+                    while (temp-&gt;next != pre) &#123;     // 找到这些块的最大地址
+                        if (max &lt; pre-&gt;start_addr) &#123;
+                            max = pre-&gt;start_addr;
+                            fbt = pre;
+                        &#125;
+                        pre = pre-&gt;next;
+                    &#125;
+                    pre = free_block;
+
+                    while (pre != temp-&gt;next) &#123;
+                        q = allocated_block_head;
+                        p = free_block;
+
+                        while (q != NULL) &#123;     // 向前推 
+                            if (q-&gt;start_addr &gt; pre-&gt;start_addr)
+                                q-&gt;start_addr = q-&gt;start_addr - pre-&gt;size;
+                            q = q-&gt;next;
+                        &#125;
+                        while (p != NULL) &#123;
+                            if (p-&gt;start_addr &gt; pre-&gt;start_addr)
+                                p-&gt;start_addr = p-&gt;start_addr - pre-&gt;size;
+                            p = p-&gt;next;
+                        &#125;
+
+                        pre = pre-&gt;next;
+                    &#125;
+
+                    pre = free_block;
+                    while (pre != temp-&gt;next) &#123;
+
+                        p1 = pre-&gt;next;
+                        if (pre == fbt)     // 最大块
+                            break;
+                        free(pre);
+                        pre = p1;
+                    &#125;
+                    q = allocated_block_head;
+                    free_block = fbt;
+                    free_block-&gt;start_addr = q-&gt;start_addr + q-&gt;size;
+
+                    free_block-&gt;size = sum;
+                    free_block-&gt;next = temp-&gt;next;
+                    if (free_block-&gt;size - request_size &lt; MIN_SLICE) &#123;  // 分割后太小就一起分割 
+                        ab-&gt;size = free_block-&gt;size;
+                        ab-&gt;start_addr = free_block-&gt;start_addr;
+                        pre = free_block;
+                        free_block = free_block-&gt;next;
+                        free(pre);
+                    &#125; else &#123;    // 分割内存
+                        ab-&gt;start_addr = free_block-&gt;start_addr;
+                        free_block-&gt;start_addr =
+                            free_block-&gt;start_addr + request_size;
+                        free_block-&gt;size = free_block-&gt;size - request_size;
+                    &#125;
+                &#125;
+            &#125; else   // 剩余空间相加仍旧不够
+                return -1;
+        &#125; else &#123;    // 遍历空闲内存找到了足够大的
+            if (fbt-&gt;size - request_size &lt; MIN_SLICE) &#123;     // 分割后太小就一起分割 
+                ab-&gt;size = fbt-&gt;size;
+                ab-&gt;start_addr = fbt-&gt;start_addr;
+                if (pre-&gt;next == free_block) &#123;
+                    free_block = fbt-&gt;next;
+                &#125; else &#123;
+                    pre-&gt;next = fbt-&gt;next;
+                &#125;
+                free_block = fbt-&gt;next;
+                free(fbt);
+            &#125; else &#123;    // 分割内存
+                ab-&gt;start_addr = fbt-&gt;start_addr;
+                fbt-&gt;start_addr = fbt-&gt;start_addr + request_size;
+                fbt-&gt;size = fbt-&gt;size - request_size;
+            &#125;
+        &#125;
+        rearrange(ma_algorithm);
+        return 1;
+    &#125; else &#123;    // 无空闲内存
+        printf(&quot;Free Memory already has been allocated over: &quot;);
+        return -1;
+    &#125;
+&#125;
+
+//选择杀死一个进程
+void kill_process() &#123;
+    struct allocated_block *ab;
+    int pid;
+    printf(&quot;Kill Process, pid=&quot;);
+    scanf(&quot;%d&quot;, &amp;pid);
+    ab = find_process(pid);
+    if (ab != NULL) &#123;
+        free_mem(ab);
+        dispose(ab);
+    &#125;
+&#125;
+
+//找到要杀死的进程的标号
+allocated_block *find_process(int pid) &#123;
+    allocated_block *abb;
+    abb = allocated_block_head;
+    if (abb-&gt;pid == pid) &#123;
+        return abb;
+    &#125;
+    abb = allocated_block_head-&gt;next;
+    while (abb-&gt;next != NULL) &#123;
+        if (abb-&gt;pid == pid)
+            return abb;
+        abb = abb-&gt;next;
+    &#125;
+    return abb;
+&#125;
+
+//释放杀死进程的内存块
+int free_mem(struct allocated_block *ab) &#123;
+    int algorithm = ma_algorithm;
+    struct free_block_type *fbt, *pre;
+    fbt = (struct free_block_type *)malloc(sizeof(struct free_block_type));
+    pre = (struct free_block_type *)malloc(sizeof(struct free_block_type));
+    if (!fbt)
+        return -1;
+
+    fbt-&gt;start_addr = ab-&gt;start_addr;
+    fbt-&gt;size = ab-&gt;size;
+    fbt-&gt;next = free_block;
+    free_block = fbt;
+    rearrange_FF();
+    pre-&gt;next = free_block;
+    pre-&gt;size = 0;
+    while (pre-&gt;next &amp;&amp; (pre-&gt;next-&gt;start_addr != fbt-&gt;start_addr))
+        pre = pre-&gt;next;
+    if (pre-&gt;size != 0 &amp;&amp; fbt-&gt;next != NULL) &#123;
+        if (((pre-&gt;start_addr + pre-&gt;size) == fbt-&gt;start_addr) &amp;&amp;
+            ((fbt-&gt;start_addr + fbt-&gt;size) == fbt-&gt;next-&gt;start_addr)) &#123;
+            pre-&gt;size = pre-&gt;size + fbt-&gt;size + fbt-&gt;next-&gt;size;
+            pre-&gt;next = fbt-&gt;next-&gt;next;
+            free(fbt-&gt;next);
+            free(fbt);
+        &#125; else if ((pre-&gt;start_addr + pre-&gt;size) == fbt-&gt;start_addr) &#123;
+            pre-&gt;size = pre-&gt;size + fbt-&gt;size;
+            pre-&gt;next = fbt-&gt;next;
+            free(fbt);
+        &#125; else if (fbt-&gt;start_addr + fbt-&gt;size == fbt-&gt;next-&gt;start_addr) &#123;
+            fbt-&gt;size = fbt-&gt;size + fbt-&gt;next-&gt;size;
+            fbt-&gt;next = fbt-&gt;next-&gt;next;
+            free(fbt-&gt;next);
+        &#125;
+    &#125; else if ((pre-&gt;size == 0) &amp;&amp; fbt-&gt;next) &#123;
+        if ((fbt-&gt;start_addr + fbt-&gt;size) == fbt-&gt;next-&gt;start_addr) &#123;
+            fbt-&gt;size = fbt-&gt;size + fbt-&gt;next-&gt;size;
+            fbt-&gt;next = fbt-&gt;next-&gt;next;
+            free_block = fbt;
+            free(fbt-&gt;next);
+        &#125;
+    &#125; else if (fbt-&gt;next == NULL) &#123;
+        if ((pre-&gt;start_addr + pre-&gt;size) == fbt-&gt;start_addr) &#123;
+            pre-&gt;size = pre-&gt;size + fbt-&gt;size;
+            pre-&gt;next = fbt-&gt;next;
+            free(fbt);
+        &#125;
+    &#125;
+    rearrange(algorithm);
+
+    return 1;
+&#125;
+
+//销毁杀死进程的结点
+int dispose(struct allocated_block *free_ab) &#123;
+    struct allocated_block *pre, *ab;
+
+    if (free_ab == allocated_block_head) &#123;
+        allocated_block_head = allocated_block_head-&gt;next;
+        free(free_ab);
+        return 1;
+    &#125;
+    pre = allocated_block_head;
+    ab = allocated_block_head-&gt;next;
+    while (ab != free_ab) &#123;
+        pre = ab;
+        ab = ab-&gt;next;
+    &#125;
+    pre-&gt;next = ab-&gt;next;
+    free(ab);
+    return 2;
+&#125;
+
+//显示内存使用情况
+int display_mem_usage() &#123;
+    struct free_block_type *fbt = free_block;
+    struct allocated_block *ab = allocated_block_head;
+    printf(&quot;----------------------------------------------------------\n&quot;);
+
+    if (fbt == NULL) &#123;
+        printf(&quot;Free Memory already used over !\n&quot;);
+    &#125;
+    printf(&quot;----------------------------------------------------------\n&quot;);
+
+    if (fbt) &#123;
+        printf(&quot;Free Memory:\n&quot;);
+        printf(&quot;%20s %20s\n&quot;, &quot; start_addr&quot;, &quot; size&quot;);
+        while (fbt != NULL) &#123;
+            printf(&quot;%20d %20d\n&quot;, fbt-&gt;start_addr, fbt-&gt;size);
+            fbt = fbt-&gt;next;
+        &#125;
+    &#125;
+
+    printf(&quot;\nUsed Memory:\n&quot;);
+    printf(&quot;%10s %20s %15s %10s\n&quot;, &quot;PID&quot;, &quot;ProcessName&quot;, &quot;start_addr&quot;,
+           &quot; size&quot;);
+    while (ab != NULL) &#123;
+        printf(&quot;%10d %20s %15d %10d\n&quot;, ab-&gt;pid, ab-&gt;process_name,
+               ab-&gt;start_addr, ab-&gt;size);
+        ab = ab-&gt;next;
+    &#125;
+    printf(&quot;----------------------------------------------------------\n&quot;);
+    return 0;
+&#125;
+
+//退出，销毁所有链表
+void do_exit() &#123;
+    free_block_type *temp;
+    allocated_block *temp1;
+
+    temp = free_block-&gt;next;
+    while (temp != NULL) &#123;
+        free_block-&gt;next = temp-&gt;next;
+        free(temp);
+        temp = free_block-&gt;next;
+    &#125;
+    free(free_block);
+
+    if(!allocated_block_head)
+        return;
+    temp1 = allocated_block_head-&gt;next;
+    while (temp1 != NULL) &#123;
+        allocated_block_head-&gt;next = temp1-&gt;next;
+        free(temp1);
+        temp1 = allocated_block_head-&gt;next;
+    &#125;
+    free(allocated_block_head-&gt;next);
+&#125;
+//主函数
+int main() &#123;
+    char choice;
+    pid = 0;
+    free_block = init_free_block(mem_size);
+    while (1) &#123;
+        display_menu();
+        fflush(stdin);
+
+        choice = getchar();
+        switch (choice) &#123;
+        case '1':
+            set_mem_size();
+            break;
+        case '2':
+            set_algorithm();
+            flag = 1;
+            break;
+        case '3':
+            new_process();
+            flag = 1;
+            break;
+        case '4':
+            kill_process();
+            flag = 1;
+            break;
+        case '5':
+            display_mem_usage();
+            flag = 1;
+            break;
+        case '0':
+            do_exit();
+            exit(0);
+        default:
+            break;
+        &#125;
+    &#125;
+    return 0;
+&#125;
+</code></pre><div class="tags"><a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" rel="tag"><i class="ic i-tag"></i> 操作系统</a> <a href="/tags/C/" rel="tag"><i class="ic i-tag"></i> C++</a></div></div><footer><div class="meta"><span class="item"><span class="icon"><i class="ic i-calendar-check"></i> </span><span class="text">更新于</span> <time title="修改时间：2021-06-12 20:28:50" itemprop="dateModified" datetime="2021-06-12T20:28:50+08:00">2021-06-12</time></span></div><div class="reward"><button><i class="ic i-heartbeat"></i> 赞赏</button><p>请我喝[茶]~(￣▽￣)~*</p><div id="qr"><div><img data-src="//cdn.jsdelivr.net/gh/horel/horel.github.io@latest/images/wechatpay.png" alt="隙驹 微信支付"><p>微信支付</p></div><div><img data-src="//cdn.jsdelivr.net/gh/horel/horel.github.io@latest/images/alipay.png" alt="隙驹 支付宝"><p>支付宝</p></div></div></div><div id="copyright"><ul><li class="author"><strong>本文作者： </strong>隙驹 <i class="ic i-at"><em>@</em></i>隙驹</li><li class="link"><strong>本文链接：</strong> <a href="http://horel.github.io/notes/%E5%8A%A8%E6%80%81%E5%88%86%E5%8C%BA%E5%88%86%E9%85%8D%E7%AE%97%E6%B3%95/" title="动态分区分配算法">http://horel.github.io/notes/动态分区分配算法/</a></li><li class="license"><strong>版权声明： </strong>本站所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="ic i-creative-commons"><em>(CC)</em></i>BY-NC-SA</span> 许可协议。转载请注明出处！</li></ul></div></footer></article></div><div class="post-nav"><div class="item left"><a href="/notes/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6%E2%80%94%E2%80%94%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="url" rel="prev" data-background-image="https:&#x2F;&#x2F;tva2.sinaimg.cn&#x2F;mw690&#x2F;6833939bly1giclx6phq6j20zk0m8e36.jpg" title="计算机图形学——学习笔记"><span class="type">上一篇</span> <span class="category"><i class="ic i-flag"></i> 二进制玄学</span><h3>计算机图形学——学习笔记</h3></a></div><div class="item right"></div></div></div><div id="sidebar"><div class="inner"><div class="panels"><div class="inner"><div class="contents panel pjax" data-title="文章目录"></div><div class="related panel pjax" data-title="系列文章"><ul><li><a href="/notes/2021%E6%96%B0%E8%AE%A1%E5%88%92/" rel="bookmark" title="2021新计划">2021新计划</a></li><li><a href="/notes/Arch-Linux%E6%8C%87%E5%8D%97/" rel="bookmark" title="Arch Linux指南">Arch Linux指南</a></li><li><a href="/notes/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6%E2%80%94%E2%80%94%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="bookmark" title="计算机图形学——学习笔记">计算机图形学——学习笔记</a></li><li class="active"><a href="/notes/%E5%8A%A8%E6%80%81%E5%88%86%E5%8C%BA%E5%88%86%E9%85%8D%E7%AE%97%E6%B3%95/" rel="bookmark" title="动态分区分配算法">动态分区分配算法</a></li></ul></div><div class="overview panel" data-title="站点概览"><div class="author" itemprop="author" itemscope itemtype="http://schema.org/Person"><img class="image" itemprop="image" alt="隙驹" data-src="//cdn.jsdelivr.net/gh/horel/horel.github.io@latest/images/avatar.jpg"><p class="name" itemprop="name">隙驹</p><div class="description" itemprop="description">= 攻城狮不是工程师 =</div></div><nav class="state"><div class="item posts"><a href="/archives/"><span class="count">6</span> <span class="name">文章</span></a></div><div class="item categories"><a href="/categories/"><span class="count">2</span> <span class="name">分类</span></a></div><div class="item tags"><a href="/tags/"><span class="count">9</span> <span class="name">标签</span></a></div></nav><div class="social"><span class="exturl item github" data-url="aHR0cHM6Ly9naXRodWIuY29tL2hvcmVs" title="https:&#x2F;&#x2F;github.com&#x2F;horel"><i class="ic i-github"></i></span> <span class="exturl item zhihu" data-url="aHR0cHM6Ly93d3cuemhpaHUuY29tL3Blb3BsZS9sYW4tYW4tNTMtOTU=" title="https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;lan-an-53-95"><i class="ic i-zhihu"></i></span> <span class="exturl item email" data-url="bWFpbHRvOjE0OTQyNTU0MTJAcXEuY29t" title="mailto:1494255412@qq.com"><i class="ic i-envelope"></i></span></div><ul class="menu"><li class="item"><a href="/" rel="section"><i class="ic i-home"></i>首页</a></li><li class="item dropdown"><a href="javascript:void(0);"><i class="ic i-feather"></i>文章</a><ul class="submenu"><li class="item"><a href="/archives/" rel="section"><i class="ic i-list-alt"></i>归档</a></li><li class="item"><a href="/categories/" rel="section"><i class="ic i-th"></i>分类</a></li><li class="item"><a href="/tags/" rel="section"><i class="ic i-tags"></i>标签</a></li></ul></li><li class="item"><a href="/gallary/" rel="section"><i class="ic i-calendar"></i>相册</a></li><li class="item"><a href="/friends/" rel="section"><i class="ic i-heart"></i>友達</a></li><li class="item"><a href="/about/" rel="section"><i class="ic i-user"></i>关于</a></li></ul></div></div></div><ul id="quick"><li class="prev pjax"></li><li class="up"><i class="ic i-arrow-up"></i></li><li class="down"><i class="ic i-arrow-down"></i></li><li class="next pjax"></li><li class="percent"></li></ul></div></div><div class="dimmer"></div></div></main><footer id="footer"><div class="inner"><div class="widgets"><div class="rpost pjax"><h2>随机文章</h2><ul><li class="item"><div class="breadcrumb"><a href="/categories/notes/" title="分类于 二进制玄学">二进制玄学</a></div><span><a href="/notes/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6%E2%80%94%E2%80%94%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" title="计算机图形学——学习笔记">计算机图形学——学习笔记</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/game-anime/" title="分类于 游戏与动漫">游戏与动漫</a></div><span><a href="/game-anime/%E9%BB%91%E6%9A%97%E4%B9%8B%E9%AD%823/" title="黑暗之魂3">黑暗之魂3</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/notes/" title="分类于 二进制玄学">二进制玄学</a></div><span><a href="/notes/%E5%8A%A8%E6%80%81%E5%88%86%E5%8C%BA%E5%88%86%E9%85%8D%E7%AE%97%E6%B3%95/" title="动态分区分配算法">动态分区分配算法</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/notes/" title="分类于 二进制玄学">二进制玄学</a></div><span><a href="/notes/Arch-Linux%E6%8C%87%E5%8D%97/" title="Arch Linux指南">Arch Linux指南</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/notes/" title="分类于 二进制玄学">二进制玄学</a></div><span><a href="/notes/2021%E6%96%B0%E8%AE%A1%E5%88%92/" title="2021新计划">2021新计划</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/game-anime/" title="分类于 游戏与动漫">游戏与动漫</a></div><span><a href="/game-anime/%E7%B4%AB%E7%BD%97%E5%85%B0%E6%B0%B8%E6%81%92%E8%8A%B1%E5%9B%AD/" title="紫罗兰永恒花园">紫罗兰永恒花园</a></span></li></ul></div><div><h2>最新评论</h2><ul class="leancloud-recent-comment"></ul></div></div><div class="status"><div class="copyright">&copy; 2020 – <span itemprop="copyrightYear">2021</span> <span class="with-love"><i class="ic i-sakura rotate"></i> </span><span class="author" itemprop="copyrightHolder">隙驹 @ 栖迟於一丘</span></div><div class="count"><span class="post-meta-item-icon"><i class="ic i-chart-area"></i> </span><span title="站点总字数">22k 字</span> <span class="post-meta-divider">|</span> <span class="post-meta-item-icon"><i class="ic i-coffee"></i> </span><span title="站点阅读时长">20 分钟</span></div><div class="powered-by">基于 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & Theme.<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2FtZWhpbWUvaGV4by10aGVtZS1zaG9rYQ==">Shoka</span></div></div></div></footer></div><script data-config type="text/javascript">var LOCAL={path:"notes/动态分区分配算法/",favicon:{show:"（●´3｀●）やれやれだぜ",hide:"(´Д｀)大変だ！"},search:{placeholder:"文章搜索",empty:"关于 「 ${query} 」，什么也没搜到",stats:"${time} ms 内找到 ${hits} 条结果"},valine:!0,fancybox:!0,copyright:'复制成功，转载请遵守 <i class="ic i-creative-commons"></i>BY-NC-SA 协议。',ignores:[function(e){return e.includes("#")},function(e){return new RegExp(LOCAL.path+"$").test(e)}]}</script><script src="https://cdn.polyfill.io/v2/polyfill.js"></script><script src="//cdn.jsdelivr.net/combine/npm/pace-js@1.0.2/pace.min.js,npm/pjax@0.2.8/pjax.min.js,npm/whatwg-fetch@3.4.0/dist/fetch.umd.min.js,npm/animejs@3.2.0/lib/anime.min.js,npm/algoliasearch@4/dist/algoliasearch-lite.umd.js,npm/instantsearch.js@4/dist/instantsearch.production.min.js,npm/lozad@1/dist/lozad.min.js,npm/quicklink@2/dist/quicklink.umd.js"></script><script src="//cdn.jsdelivr.net/gh/horel/horel.github.io@latest/js/app.js?v=0.2.5"></script></body></html>
