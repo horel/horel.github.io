@@ -7,6 +7,17 @@
     "home_page_url": "http://horel.github.io",
     "items": [
         {
+            "id": "http://horel.github.io/notes/%E7%BC%96%E7%A8%8B%E4%B8%AD%E5%90%84%E7%AC%A6%E5%8F%B7%E5%AF%B9%E5%BA%94%E5%8D%95%E8%AF%8D/",
+            "url": "http://horel.github.io/notes/%E7%BC%96%E7%A8%8B%E4%B8%AD%E5%90%84%E7%AC%A6%E5%8F%B7%E5%AF%B9%E5%BA%94%E5%8D%95%E8%AF%8D/",
+            "title": "编程中各符号对应单词",
+            "date_published": "2021-06-18T14:22:25.000Z",
+            "content_html": "<h1 id=\"编程中各符号对应单词\"><a class=\"anchor\" href=\"#编程中各符号对应单词\">#</a> 编程中各符号对应单词</h1>\n<div class=\"tab\" data-id=\"id1\" data-title=\"常见符号\">\n<p><span class=\"label danger\">💔警告</span>\t<s class=\"danger\">未经查验，应该有错的</s></p>\n<table>\n<thead>\n<tr>\n<th style=\"text-align:center\">符号</th>\n<th style=\"text-align:center\">英文</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td style=\"text-align:center\">-</td>\n<td style=\"text-align:center\">dash</td>\n</tr>\n<tr>\n<td style=\"text-align:center\">/</td>\n<td style=\"text-align:center\">slash</td>\n</tr>\n<tr>\n<td style=\"text-align:center\">\\</td>\n<td style=\"text-align:center\">back`slash |</td>\n</tr>\n<tr>\n<td style=\"text-align:center\">;</td>\n<td style=\"text-align:center\">semicolon</td>\n</tr>\n<tr>\n<td style=\"text-align:center\">:</td>\n<td style=\"text-align:center\">colon</td>\n</tr>\n<tr>\n<td style=\"text-align:center\">.</td>\n<td style=\"text-align:center\">dot</td>\n</tr>\n<tr>\n<td style=\"text-align:center\">,</td>\n<td style=\"text-align:center\">comma</td>\n</tr>\n<tr>\n<td style=\"text-align:center\">||</td>\n<td style=\"text-align:center\">parallel</td>\n</tr>\n<tr>\n<td style=\"text-align:center\">&amp;</td>\n<td style=\"text-align:center\">and</td>\n</tr>\n<tr>\n<td style=\"text-align:center\">#</td>\n<td style=\"text-align:center\">number</td>\n</tr>\n<tr>\n<td style=\"text-align:center\">@</td>\n<td style=\"text-align:center\">at</td>\n</tr>\n<tr>\n<td style=\"text-align:center\">*</td>\n<td style=\"text-align:center\">asterisk</td>\n</tr>\n<tr>\n<td style=\"text-align:center\">()</td>\n<td style=\"text-align:center\">paren</td>\n</tr>\n<tr>\n<td style=\"text-align:center\">{}</td>\n<td style=\"text-align:center\">brace</td>\n</tr>\n<tr>\n<td style=\"text-align:center\">[]</td>\n<td style=\"text-align:center\">bracket</td>\n</tr>\n</tbody>\n</table>\n</div>\n",
+            "tags": [
+                "二进制玄学",
+                "随笔"
+            ]
+        },
+        {
             "id": "http://horel.github.io/notes/%E5%8A%A8%E6%80%81%E5%88%86%E5%8C%BA%E5%88%86%E9%85%8D%E7%AE%97%E6%B3%95/",
             "url": "http://horel.github.io/notes/%E5%8A%A8%E6%80%81%E5%88%86%E5%8C%BA%E5%88%86%E9%85%8D%E7%AE%97%E6%B3%95/",
             "title": "动态分区分配算法",
