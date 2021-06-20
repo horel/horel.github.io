@@ -10,10 +10,38 @@
         </author>
         <description>= 攻城狮不是工程师 =</description>
         <language>zh-CN</language>
-        <pubDate>Fri, 18 Jun 2021 22:22:25 +0800</pubDate>
-        <lastBuildDate>Fri, 18 Jun 2021 22:22:25 +0800</lastBuildDate>
+        <pubDate>Sun, 20 Jun 2021 16:42:27 +0800</pubDate>
+        <lastBuildDate>Sun, 20 Jun 2021 16:42:27 +0800</lastBuildDate>
         <category term="Linux" />
         <category term="Game" />
+        <item>
+            <guid isPermalink="true">http://horel.github.io/notes/%E7%BC%96%E8%AF%91DOOM3/</guid>
+            <title>编译DOOM3</title>
+            <link>http://horel.github.io/notes/%E7%BC%96%E8%AF%91DOOM3/</link>
+            <category term="二进制玄学" scheme="http://horel.github.io/categories/notes/" />
+            <category term="Linux" scheme="http://horel.github.io/tags/Linux/" />
+            <category term="编译" scheme="http://horel.github.io/tags/%E7%BC%96%E8%AF%91/" />
+            <pubDate>Sun, 20 Jun 2021 16:42:27 +0800</pubDate>
+            <description><![CDATA[ &lt;h1 id=&#34;编译doom3&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#编译doom3&#34;&gt;#&lt;/a&gt; 编译 DOOM3&lt;/h1&gt;
+&lt;p&gt;ID SoftWare 公司的经典作品，DOOM3&lt;/p&gt;
+&lt;p&gt;&lt;s class=&#34;danger&#34;&gt;其实是因为我是约翰・卡马克的粉丝&lt;/s&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://tva4.sinaimg.cn/large/008ieO5lly8gqmb5tqfs4j30go093wfi.jpg&#34; alt=&#34;约翰·卡马克&#34; title=&#34;约翰·卡马克&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;直接选择编译 DOOM3-BFG 了，恰好 Github 上有大佬专门写了这部分的引擎，&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9naXRodWIuY29tL1JvYmVydEJlY2tlYmFucy9SQkRPT00tMy1CRkc=&#34;&gt;RBDOOM-3-BFG&lt;/span&gt;，就直接拿来编译了&lt;/p&gt;
+&lt;p&gt;然后就吃了不同发行版之间的亏......&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;ArchLinux 要安装以下的依赖&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;figcaption data-lang=&#34;bash&#34;&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token function&#34;&gt;sudo&lt;/span&gt; pacman -S sdl2 cmake openal ffmpeg&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;p&gt;但是因为 SDL2 官方有两种打包方式，显然 ArchLinux 采用了另一种让，所以我在编译时一直找不到 SDL......&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;因此修改以下 CMakeLists.txt&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;figure class=&#34;highlight cmake&#34;&gt;&lt;figcaption data-lang=&#34;CMake&#34;&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;diff --git a/neo/CMakeLists.txt b/neo/CMakeLists.txt&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;2&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;index 1a36eef..ba149df &lt;span class=&#34;token number&#34;&gt;100644&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;3&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;--- a/neo/CMakeLists.txt&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;4&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;+++ b/neo/CMakeLists.txt&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;5&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;@@ -&lt;span class=&#34;token number&#34;&gt;1599&lt;/span&gt;,&lt;span class=&#34;token number&#34;&gt;8&lt;/span&gt; +&lt;span class=&#34;token number&#34;&gt;1599&lt;/span&gt;,&lt;span class=&#34;token number&#34;&gt;8&lt;/span&gt; @@ &lt;span class=&#34;token keyword&#34;&gt;else&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;6&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt; &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;7&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt; 		&lt;span class=&#34;token keyword&#34;&gt;if&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;SDL2&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;8&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt; 			&lt;span class=&#34;token keyword&#34;&gt;find_package&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;SDL2 REQUIRED&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;9&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;-			&lt;span class=&#34;token keyword&#34;&gt;include_directories&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;$&amp;#123;&lt;/span&gt;SDL2_INCLUDE_DIRS&lt;span class=&#34;token punctuation&#34;&gt;&amp;#125;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;10&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;-			&lt;span class=&#34;token keyword&#34;&gt;set&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;SDLx_LIBRARY &lt;span class=&#34;token punctuation&#34;&gt;$&amp;#123;&lt;/span&gt;SDL2_LIBRARIES&lt;span class=&#34;token punctuation&#34;&gt;&amp;#125;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;11&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;+			&lt;span class=&#34;token keyword&#34;&gt;include_directories&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token inserted class-name&#34;&gt;SDL2::SDL2&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;12&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;+			&lt;span class=&#34;token keyword&#34;&gt;set&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;SDLx_LIBRARY &lt;span class=&#34;token inserted class-name&#34;&gt;SDL2::SDL2&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;13&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt; 		&lt;span class=&#34;token keyword&#34;&gt;else&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;14&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt; 			&lt;span class=&#34;token keyword&#34;&gt;find_package&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;SDL REQUIRED&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;15&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt; 			&lt;span class=&#34;token keyword&#34;&gt;include_directories&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;$&amp;#123;&lt;/span&gt;SDL_INCLUDE_DIR&lt;span class=&#34;token punctuation&#34;&gt;&amp;#125;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;p&gt;编译完成后，将游戏的资源文件 base 放入 build 文件夹&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;注意，运行游戏时，会在～/.local/share/rbdoom3bfg 下生成游戏文件&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;如果重新编译使用记得清除旧游戏生成文件&lt;/p&gt;
+ ]]></description>
+        </item>
         <item>
             <guid isPermalink="true">http://horel.github.io/notes/%E7%BC%96%E7%A8%8B%E4%B8%AD%E5%90%84%E7%AC%A6%E5%8F%B7%E5%AF%B9%E5%BA%94%E5%8D%95%E8%AF%8D/</guid>
             <title>编程中各符号对应单词</title>
