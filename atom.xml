@@ -33,7 +33,13 @@
 &lt;p&gt;注意，运行游戏时，会在～/.local/share/rbdoom3bfg 下生成游戏文件&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;如果重新编译使用记得清除旧游戏生成文件&lt;/p&gt;
-</content>
+&lt;blockquote&gt;
+&lt;p&gt;vulkan 支持需要 git clone ----recursive&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;随后我创建了它的桌面图标&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;figcaption data-lang=&#34;bash&#34;&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token function&#34;&gt;vi&lt;/span&gt; .local/share/applications/DOOM3.desktop&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;figure class=&#34;highlight bash&#34;&gt;&lt;figcaption data-lang=&#34;bash&#34;&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token punctuation&#34;&gt;[&lt;/span&gt;Desktop Entry&lt;span class=&#34;token punctuation&#34;&gt;]&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;2&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;Name &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; DOOM-3-BFG&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;3&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;Exec &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; /home/limbo/Documents/aur/RBDOOM-3-BFG/DOOM3/build/RBDoom3BFG&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;4&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;Encoding &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; UTF-8&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;5&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;Comment &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; DOOM-3-BFG&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;6&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;Type &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; Application&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;7&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token assign-left variable&#34;&gt;Terminal&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;false&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;</content>
         <category term="二进制玄学" scheme="http://horel.github.io/categories/notes/" />
         <category term="Linux" scheme="http://horel.github.io/tags/Linux/" />
         <category term="编译" scheme="http://horel.github.io/tags/%E7%BC%96%E8%AF%91/" />
