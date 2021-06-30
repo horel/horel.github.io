@@ -403,6 +403,10 @@ yarn install
 
 > 全放在chrome书签栏里了
 
+## 其他软件
+
+- ImageMagick	安装后可使用display命令
+
 # 美化
 
 >  根据自己喜好来吧，可以参考 https://www.gnome-look.org
