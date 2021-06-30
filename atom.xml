@@ -21,14 +21,14 @@
 &lt;blockquote&gt;
 &lt;p&gt;例如，我想求根号 2 等于多少。假如我猜测的结果为 4，虽然错的离谱，但你可以看到使用牛顿迭代法后这个值很快就趋近于根号 2 了：&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;;;;&lt;/p&gt;
+&lt;div class=&#34;tab&#34; data-id=&#34;info&#34; data-title=&#34;&#34;&gt;
 &lt;p&gt;(    4 + 2/  4   ) / 2 = 2.25&lt;br /&gt;
 (  2.25 + 2/  2.25 ) / 2 = 1.56944..&lt;br /&gt;
 ( 1.56944..+ 2/1.56944..) / 2 = 1.42189..&lt;br /&gt;
 ( 1.42189..+ 2/1.42189..) / 2 = 1.41423..&lt;br /&gt;
 ….&lt;/p&gt;
-&lt;p&gt;;;;&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cDovL3d3dy5tYXRyaXg2Ny5jb20vYmxvZ2ltYWdlLzIwMDcxMTI0MS5naWY=&#34;&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;p&gt;&lt;img data-src=&#34;http://www.matrix67.com/blogimage/200711241.gif&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;原理其实很简单，我们仅仅是不断用 (x,f (x)) 的切线来逼近方程 x^2-a=0 的根。&lt;/p&gt;
 &lt;p&gt;根号 a 实际上就是 x^2-a=0 的一个正实根，这个函数的导数是 2x。&lt;/p&gt;
 &lt;p&gt;也就是说，函数上任一点 (x,f (x)) 处的切线斜率是 2x。那么，x-f (x)/(2x) 就是一个比 x 更接近的近似值。&lt;/p&gt;
