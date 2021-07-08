@@ -338,12 +338,18 @@ sudo vim /etc/proxychains.conf
 最后填入socks5	127.0.0.1	7891
 ```
 
+## yarn
+
+> 捞配置文件里	.yarnrc
+
 ## neovim
 
 ```bash
 sudo pacman -S neovim nodejs yarn python python-neovim xsel
 nvim :checkhealth不用管ruby(我不用)
 ```
+
+### plug install
 
 > 安装vim-plug：https://github.com/junegunn/vim-plug
 
@@ -353,6 +359,8 @@ sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.
 ```
 
 > 捞dotfiles最后 :PlugInstall
+
+### coc.nvim
 
 > CocInstall coc-marketplace
 >
@@ -369,6 +377,24 @@ sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.
 > coc-highlight
 >
 > coc-clangd
+>
+> coc-java
+
+### neoformat
+
+> c/cpp格式化
+>
+> clang-format --dump-config --style="{BasedOnStyle: llvm, IndentWidth: 4}" > .clang-format
+
+> java格式化
+>
+> sudo pacman -S astyle
+>
+> echo "--style=java" > .astylerc
+
+> xml格式化
+>
+> sudo pacman -S tidy
 
 ## hexo博客恢复
 
@@ -403,9 +429,28 @@ yarn install
 
 > 全放在chrome书签栏里了
 
+## VSCode
+
+> 插件
+
+- One Dark Pro
+
+- Cloudmusic
+- cpp全家桶
+- java全家桶
+
+> 字体
+
+- 'JetBrains Mono','MesloLGS NF','Sarasa Mono SC','monospace','Droid Sans Mono',  monospace, 'Droid Sans Fallback'
+- 控制字体大小 19
+- 终端字体大小 16
+
+> Window: Title Bar Style
+
 ## 其他软件
 
 - ImageMagick	安装后可使用display命令
+- android-tools    安卓工具包(adb等)
 
 # 美化
 
