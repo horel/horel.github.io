@@ -402,7 +402,8 @@ sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.
 yarn global add hexo-cli
 cd Blog
 yarn
-yarn install
+然后deasync这玩意有可能不对，重装它吧......
+yarn add deasync
 ```
 
 ## telegram
