@@ -448,6 +448,24 @@ yarn add deasync
 
 > Window: Title Bar Style
 
+## maven
+
+> 设置镜像 vi .m2/settings.xml
+
+```xml
+<settings>
+    <mirrors>
+        <mirror>
+            <id>nexus-tencentyun</id>
+            <mirrorOf>*</mirrorOf>
+            <name>Nexus tencentyun</name>
+            <url>
+            http://mirrors.cloud.tencent.com/nexus/repository/maven-public/</url>
+        </mirror>
+    </mirrors>
+</settings>
+```
+
 ## 其他软件
 
 - ImageMagick	安装后可使用display命令
