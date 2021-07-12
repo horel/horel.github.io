@@ -446,7 +446,19 @@ yarn add deasync
 - 控制字体大小 19
 - 终端字体大小 16
 
-> Window: Title Bar Style
+> 主题
+
+- Window: Title Bar Style
+- One Dark Pro
+
+> 键映射	!!用惯了Vim实在习惯不了UpArrow / DownArrow补全!!{.danger}
+
+- "key": "tab"
+
+  "command": "selectNextSuggestion"
+
+-  "key": "shift+tab",
+   "command": "selectPrevSuggestion"
 
 ## maven
 
