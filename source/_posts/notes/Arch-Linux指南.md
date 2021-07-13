@@ -242,11 +242,33 @@ sudo systemctl enable bluetooth
 
 Server = https://mirrors.bfsu.edu.cn/archlinuxcn/$arch
 
+## pacman配置
+
+> vim /etc/pacman.conf	吃豆人、升级前后对比版本
+
+Color
+
+ILoveCandy
+
+VerbosePkgLists
+
 ## 安装常用软件
 
 ```bash
 sudo pacman -S zsh alacritty git wget typora telegram google-chrome chromium neofetch gcc gdb clang llvm nodejs yarn visual-studio-code-bin
 ```
+
+## 挂起设置
+
+> vim /etc/fstab 把swap的UUID复制下来
+
+> sudo vim /etc/default/grub	在GRUB_CMDLINE_LINUX_DEFAULT里添加例如如下的UUID
+>
+> resume=UUID=b184a7a0-a9c4-431c-b0a7-f50bbf052eb5
+
+> sudo vim /etc/mkinitcpio.conf	修改例如如下的内容
+>
+> HOOKS=(base udev resume autodetect modconf block filesystems keyboard fsck)
 
 # 软件安装配置
 
