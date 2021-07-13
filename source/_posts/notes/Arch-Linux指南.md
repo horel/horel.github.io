@@ -380,6 +380,22 @@ sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.
 >
 > coc-java
 
+### coc-java
+
+> 格式化
+
+> vi rc.d/03-plugins-settings.vim 添加函数和快捷键
+
+" Add `:Format` command to format current buffer.
+
+command! -nargs=0 Format :call CocAction('format')
+
+nnoremap<silent> <leader>lf :Format<CR>
+
+> CocCommand java.open.formatter.settings 	(需要打开一个java文件)
+>
+> https://github.com/google/styleguide/blob/gh-pages/eclipse-java-google-style.xml 	粘贴进去
+
 ### neoformat
 
 > c/cpp格式化
@@ -388,13 +404,23 @@ sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.
 
 > java格式化
 >
-> sudo pacman -S astyle
+> ~~sudo pacman -S astyle~~
 >
-> echo "--style=java" > .astylerc
+> ~~echo "--style=java" > .astylerc~~
+>
+> (该方法效果一般，已弃用)
 
 > xml格式化
 >
 > sudo pacman -S tidy
+
+### highlight
+
+> neovim 0.5版本以后使用nvim-treesitter
+>
+> https://github.com/nvim-treesitter/nvim-treesitter
+
+:TSInstall {language}
 
 ## hexo博客恢复
 
