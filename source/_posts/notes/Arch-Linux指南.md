@@ -184,7 +184,7 @@ mount /dev/nvme1n1p1 MS
 
 #要注意os_prober已经默认不识别其他系统了
 vim /etc/default/grub
-最后一行填入GRUB_	DISABLE_OS_PROBER=false
+最后一行填入GRUB_DISABLE_OS_PROBER=false
 
 grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=Arch --recheck
 grub-mkconfig -o /boot/grub/grub.cfg
