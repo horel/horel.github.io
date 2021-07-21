@@ -48,7 +48,7 @@ ls /sys/firmware/efi/efivars
 ```bash
 iwctl
 device list
-station device scan
+station wlan0 scan
 station wlan0 connect "网络名_xxx"
 ```
 
@@ -106,7 +106,7 @@ vim /etc/pacman.d/mirrorlist
 
 最上面填入：
 
-Server = https://mirrors.bfsu.edu.cn/archlinux/$repo/os/$arch
+> Server = https://mirrors.bfsu.edu.cn/archlinux/$repo/os/$arch
 
 ## 安装必须软件包
 
