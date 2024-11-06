@@ -1,12 +1,16 @@
 ---
 title: "{{ replace .Name "-" " " | title }}"
+comment: false
+weight: 0
 date: {{ .Date }}
-draft: false
-math: true
-featuredImage: ""
-featuredImagePreview: ""
-keywords: [""]
-tags: [""]
+# 由 enableGitInfo 替代
+# lastmod: {{ now.Format "2000-01-01" }}
+# draft: false
+# math: true
+# featuredImage: ""
+# featuredImagePreview: ""
+# keywords: [""]
 categories: [""]
-lastmod: {{ .Date }}
+tags:
+  - 
 ---
