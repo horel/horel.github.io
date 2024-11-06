@@ -81,8 +81,8 @@ theme = "FeelIt"
     absoluteURL = false
     [params.search.algolia]
       index = "horel_io"
-      appID = "JLSXOSCBYN"
-      searchKey = "44c6685d5b1572458f71fa76f52cff67"
+      appID = "3TOVRCF454"
+      searchKey = "31b1ff8b793fb3f693d44423818ae413"
 
   # 页面头部导航栏配置
   [params.header]
