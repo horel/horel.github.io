@@ -201,6 +201,9 @@ winget install Python.Python.3.12 -i -s winget
 > https://otp.landian.vip/zh-cn/download.html
 
 先部署一个64位的Office，365企业应用版
+```
+deploy /add O365ProPlusRetail_zh-cn /O365ProPlusRetail.exclapps Access,Bing,Groove,Lync,OneDrive,OneNote,Outlook,Publisher,Teams /channel Current /dlfirst
+```
 
 自动激活，按下快捷键 Ctrl + Shift + P，打开命令框
 ```
