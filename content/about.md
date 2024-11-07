@@ -18,7 +18,7 @@ categories: [""]
 
 最喜爱的程序员是[John Carmack](https://en.wikipedia.org/wiki/John_Carmack)和[Linus Torvalds](https://en.wikipedia.org/wiki/Linus_Torvalds)
 
-![John Carmack](https://tva4.sinaimg.cn/large/008ieO5lly8gqmb5tqfs4j30go093wfi.jpg)
+![John Carmack](https://cdn.beekka.com/blogimg/asset/202306/bg2023060711.webp)
 ![Linus Torvalds](https://pic3.zhimg.com/v2-6ec17a4f184ee3702974b74024d22ba1_720w.jpg?source=7e7ef6e2)
 
 Which hurts more , the pain of **hard work** or the pain of **regret** ?
