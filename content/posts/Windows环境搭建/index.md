@@ -40,11 +40,14 @@ winget pin add --id=LLVM.LLVM
 ```
 winget install ClashVergeRev.ClashVergeRev -i -s winget
 ```
-Trojan订阅
-```
-https://sub.wsl.icu/link/n5GqY3dafUiOGcWA?clash=4&noclass=1
-```
+Trojan订阅在 Actions secrets and variables 的 Repository variables 里
+
 ![v2rayA](assets/ClashVerge.png)
+
+UWP
+- Microsoft Store
+- 工作或学校帐户
+- OneDrive
 
 ## MinGW
 可直接使用Qt构建的MinGW
@@ -183,10 +186,14 @@ winget install Bandisoft.Bandizip --version 6.29 -i -s winget
 ```
 winget install Git.Git -i -s winget
 ```
+```
+git config --global user.name "username"
+git config --global user.email useremail@gmail.com
+```
 
 - Python
 ```
-winget install Python.Python.3.12 -i -s winget
+winget install Python.Python.3.13 -i -s winget
 ```
 - DiskGenius
 > https://www.diskgenius.cn/download.php
