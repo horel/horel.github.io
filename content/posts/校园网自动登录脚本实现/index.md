@@ -85,7 +85,7 @@ if __name__ == "__main__":
     os._exit(0)
 ```
 
-## 待改进点
+## 脚本通知(选做)
 可以使用 win10toast 这个库，改进脚本运行的提示内容，将脚本当中的print全部替换为windows自带的消息通知
 ```python
 from win10toast import ToastNotifier
@@ -97,3 +97,23 @@ ToastNotifier().show_toast(
     threaded = False
 )
 ```
+
+## 设置脚本开机自启
+- 搜索任务计划程序
+
+![](assets/3.png)
+- 创建任务
+
+![](assets/4.png)
+- 给予权限，win10运行
+
+![](assets/5.png)
+- 触发器设置启动时，延迟3秒
+
+![](assets/6.png)
+- 设置 python 启动该脚本，参数填写 auto_login.pyw 脚本路径
+
+![](assets/7.png)
+- 取消电源设置
+
+![](assets/8.png)
