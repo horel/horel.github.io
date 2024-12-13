@@ -42,7 +42,7 @@ ls /sys/firmware/efi/efivars
 
 ### 启动参数修改(optional)
 
-> 若正常启动后花屏,说明显卡驱动有问题(例如NvimDIA显卡太新还没有开源驱动)
+> 若正常启动后花屏,说明显卡驱动有问题(例如NviDIA显卡太新还没有开源驱动)
 
 启动项按e添加```modprobe.blacklist=nouveau```以禁用开源驱动
 
@@ -51,7 +51,7 @@ ls /sys/firmware/efi/efivars
 - 无线使用iwd连接
 ```bash
 iwctl
-devimce list
+device list
 station wlan0 scan
 station wlan0 connect "网络名_xxx"
 ```
@@ -104,7 +104,7 @@ mount /dev/nvme0n1p3 /mnt/home
 ### 选择镜像
 
 ```bash
-vimm /etc/pacman.d/mirrorlist
+vim /etc/pacman.d/mirrorlist
 ```
 
 最上面填入一个连接足够好的镜像站：
@@ -114,14 +114,14 @@ vimm /etc/pacman.d/mirrorlist
 ### 安装必须软件包
 
 ```bash
-pacstrap /mnt bash-completion iwd dhcpcd base base-devel linux linux-firmware linux-headers words man man-db man-pages texinfo vimm xfsprogs ntfs-3g nvimdia nvimdia-utils nvimdia-settings opencl-nvimdia
+pacstrap /mnt bash-completion iwd dhcpcd base base-devel linux linux-firmware linux-headers words man man-db man-pages texinfo vim xfsprogs ntfs-3g nvidia nvidia-utils nvidia-settings opencl-nvidia
 ```
 
 ### 生成Fstab
 
 ```bash
 genfstab -U /mnt >> /mnt/etc/fstab
-vimm /mnt/etc/fstab
+vim /mnt/etc/fstab
 ```
 
 ### Chroot至新系统
@@ -136,25 +136,25 @@ arch-chroot /mnt
 ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 hwclock --systohc
 
-vimm /etc/locale.gen
+vim /etc/locale.gen
 取消注释zh_CN.UTF-8和en_US.UTF-8
 
 locale-gen
 
-vimm /etc/locale.conf
+vim /etc/locale.conf
 填入LANG=en_US.UTF-8
 ```
 
 ### 网络配置
 
 ```bash
-vimm /etc/hostname
+vim /etc/hostname
 ```
 
 填入自己的主机名，例如AORUS
 
 ```bash
-vimm /etc/hosts
+vim /etc/hosts
 ```
 
 填入如下，要注意主机名相同
@@ -193,7 +193,7 @@ mkdir MS
 mount /dev/nvme1n1p1 MS
 
 #要注意os_prober已经默认不识别其他系统了, 挂载windows的efi所在的分区再配置grub-mkconfig即可
-vimm /etc/default/grub
+vim /etc/default/grub
 最后一行填入GRUB_DISABLE_OS_PROBER=false
 
 grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=Arch --recheck
@@ -223,7 +223,7 @@ station wlan0 connect "网络名_xxx"
 
 ```bash
 useradd -m -G wheel 用户名(horel)
-EDITOR=vimm vimsudo
+EDITOR=vim visudo
 取消注释 %wheel ALL=(ALL) ALL
 passwd 用户名(horel)
 exit
@@ -256,7 +256,7 @@ sudo systemctl enable bluetooth
 
 ### 配置CN源
 
-> vimm /etc/pacman .conf
+> vim /etc/pacman .conf
 >
 > 加入以下内容
 
@@ -266,7 +266,7 @@ Server = https://mirrors.bfsu.edu.cn/archlinuxcn/$arch
 
 ### pacman配置
 
-> vimm /etc/pacman.conf	吃豆人、升级前后对比版本
+> vim /etc/pacman.conf	吃豆人、升级前后对比版本
 
 Color
 
@@ -277,7 +277,7 @@ VerbosePkgLists
 ### 安装常用软件
 
 ```bash
-sudo pacman -S zsh neovimm alacritty git wget telegram chromium neofetch gcc gdb clang llvm nodejs pnpm clash-verge-rev run-parts paru
+sudo pacman -S zsh neovim alacritty git wget telegram chromium neofetch gcc gdb clang llvm nodejs pnpm clash-verge-rev run-parts paru
 ```
 ### 设置交换文件 swapfile
 ```bash
@@ -303,9 +303,9 @@ KDE 自身提供开箱即用的睡眠功能(suspend)，即将系统挂起到内�
 ### 配置环境变量
 
 修改这几个文件
-- vim ~/.config/environment.d/envvars.conf
-- vim ~/.zprofile
-- vim .gitconfig
+- vi ~/.config/environment.d/envvars.conf
+- vi ~/.zprofile
+- vi .gitconfig
 ```bash
 source ~/.zprofile
 ```
@@ -360,7 +360,7 @@ git clone https://github.com/zsh-users/zsh-autosuggestions.git
 安装依赖
 ```bash
 sudo pacman -S neovim nodejs pnpm python python-neovim xsel lua lua-language-server words
-nvimm :checkhealth不用管ruby(我不用)
+nvim :checkhealth不用管ruby(我不用)
 ```
 复制dotfiles里的配置, 执行 clean_nvim.sh, 重新运行 nvim 会自动下载
 
@@ -433,7 +433,7 @@ editor.action.formatDocument.none : ctrl+k ctrl+f
 ```
 ### maven
 
-> 设置镜像 vim .m2/settings.xml
+> 设置镜像 vi .m2/settings.xml
 
 ```xml
 <settings>
@@ -466,7 +466,7 @@ editor.action.formatDocument.none : ctrl+k ctrl+f
 - **Dash to Dock**  暂未更新gnome40
 - **Espresso** 小咖啡，记得把它配置里的消息提醒关了
 - **Native Window Placement** 缩小托盘图标间距
-- **No overvimew at start-up** 在gnome40上开机不自动overvimew
+- **No overview at start-up** 在gnome40上开机不自动overview
 - **OpenWeather**
 - **Removable Drive Menu** 托盘移除U盘
 - **Screenshot Tool**
@@ -498,11 +498,11 @@ editor.action.formatDocument.none : ctrl+k ctrl+f
 
 ### grub
 
-[vimmix-grub-theme](https://github.com/vimnceliuice/grub2-themes)
+[vimix-grub-theme](https://github.com/vinceliuice/grub2-themes)
 
 ```bash
-git clone https://github.com/vimnceliuice/grub2-themes.git
-sudo ./install.sh -b -t vimmix -i white
+git clone https://github.com/vinceliuice/grub2-themes.git
+sudo ./install.sh -b -t vimix -i white
 ```
 
 ## kde美化
@@ -538,18 +538,18 @@ Theme will be in use next time you reboot your system.
 - 系统设置 > 鼠标和触摸板 > 屏幕边缘，取消左上角屏幕边界的配置
 
 ## 疑难问题(optional)
-### 修gdm和nvimdia冲突bug(Fuck NvimDIA!)
+### 修gdm和nvidia冲突bug(Fuck NVIDIA!)
 
-> 有个版本内核gdm和nvimdia驱动冲突了，会卡gdm黑屏
+> 有个版本内核gdm和nvidia驱动冲突了，会卡gdm黑屏
 
-> 把nvimdia启动写进kernel modules，提前启动
+> 把nvidia启动写进kernel modules，提前启动
 
 ```bash
-sudo nvimm /etc/mkinitcpio.conf
-MODULES=(nvimdia nvimdia_modeset nvimdia_uvm nvimdia_drm)
+sudo nvim /etc/mkinitcpio.conf
+MODULES=(nvidia nvidia_modeset nvidia_uvm nvidia_drm)
 HOOKS=(base udev autodetect modconf block filesystems keyboard fsck)
-sudo nvimm /etc/default/grub
-内核参数加nvimdia-drm.modeset=1
+sudo nvim /etc/default/grub
+内核参数加nvidia-drm.modeset=1
 sudo mkinitcpio -P
 sudo grub-mkconfig -o /boot/grub/grub.cfg
 ```
