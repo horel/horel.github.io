@@ -77,12 +77,23 @@ grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=Arch --re
 echo "Generating GRUB configuration file..."
 grub-mkconfig -o /boot/grub/grub.cfg
 
+# install NVIDIA driver ?
+echo "install NVIDIA driver? [y/n]"
+read INSTALL_NVIDIA
+
+if [[ "$INSTALL_NVIDIA" == "y" || "$INSTALL_NVIDIA" == "Y" ]]; then
+    echo "installing NVIDIA driver..."
+    pacman -S nvidia nvidia-utils nvidia-settings opencl-nvidia --noconfirm
+    echo "NVIDIA driver completed"
+else
+    echo "skip NVIDIA driver"
+fi
+
 # Exit chroot environment
 echo "Exiting chroot environment..."
-exit
-
 # Unmount partitions and reboot
 echo "Unmounting all mounted partitions..."
-umount -R /mnt
-echo "Rebooting the system..."
-reboot
+
+echo "[__TODO__]$ exit"
+echo "[__TODO__]$ umount -R /mnt"
+echo "[__TODO__]$ reboot"

@@ -96,7 +96,7 @@ echo "Software repository setup completed. Please confirm if the configuration i
 # Install necessary packages
 echo "Installing necessary packages..."
 # Use pacstrap to install packages
-pacstrap /mnt bash-completion iwd dhcpcd base base-devel linux linux-firmware linux-headers words man man-db man-pages texinfo vim xfsprogs ntfs-3g nvidia nvidia-utils nvidia-settings opencl-nvidia
+pacstrap /mnt bash-completion iwd dhcpcd base base-devel linux linux-firmware linux-headers words man man-db man-pages texinfo vim xfsprogs ntfs-3g 
 echo "Package installation completed, please check if the installation is successful."
 
 # Generate fstab file
