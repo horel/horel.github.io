@@ -10,9 +10,9 @@ date: 2024-11-21T22:10:09+08:00
 # featuredImage: ""
 # featuredImagePreview: ""
 # keywords: [""]
-categories: ["杂项"]
+categories: ["网络"]
 tags:
-  - 杂项
+  - 网络
 ---
 
 # 校园网自动登录脚本实现
