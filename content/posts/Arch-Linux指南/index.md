@@ -1,7 +1,7 @@
 ---
 title: Arch Linux指南
 comment: false
-weight: 10
+weight: 1
 categories: ["Linux"]
 tags:
   - Linux

@@ -1,7 +1,7 @@
 ---
 title: "Windows环境搭建"
 comment: false
-weight: 10
+weight: 3
 date: 2024-11-07T00:42:28+08:00
 # 由 enableGitInfo 替代
 # lastmod: 7000-11-11
