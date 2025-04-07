@@ -352,11 +352,12 @@ sudo pacman -S noto-fonts noto-fonts-extra noto-fonts-cjk noto-fonts-emoji noto-
 > 在.config/zsh下捞配置即可
 
 ```bash
-sudo pacman -S exa
+sudo pacman -S exa zoxide
 cd plugins
-git clone https://github.com/zdharma/fast-syntax-highlighting.git
-git clone https://github.com/skywind3000/z.lua.git
+git clone https://github.com/z-shell/F-Sy-H.git
 git clone https://github.com/zsh-users/zsh-autosuggestions.git
+sudo chsh -s /bin/zsh
+reboot
 ```
 
 > 新建.cache/zsh/history存放记录
