@@ -359,7 +359,9 @@ git clone https://github.com/zsh-users/zsh-autosuggestions.git
 sudo chsh -s /bin/zsh
 reboot
 ```
-
+```bash
+dotfiles submodule update --init
+```
 > 新建.cache/zsh/history存放记录
 
 ### neovim
