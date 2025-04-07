@@ -218,6 +218,11 @@ dhcpcd
 iwctl
 station wlan0 connect "网络名_xxx"
 ```
+### 开启ssh服务
+```bash
+pacman -S openssh
+systemctl enable --now sshd
+```
 
 ### 新建用户并授权
 
@@ -232,7 +237,7 @@ exit
 
 ### 安装桌面
 
-> 安装gnome桌面
+> ~~安装gnome桌面~~
 ```bash
 sudo pacman -S xorg gdm gnome gnome-tweaks gnome-browser-connector
 ```
@@ -454,7 +459,7 @@ editor.action.formatDocument.none : ctrl+k ctrl+f
 - ImageMagick	安装后可使用display命令
 - android-tools    安卓工具包(adb等)
 
-## gnome美化
+## ~~gnome美化(废弃)~~
 
 >  根据自己喜好来吧，可以参考 https://www.gnome-look.org
 
@@ -505,7 +510,7 @@ git clone https://github.com/vinceliuice/grub2-themes.git
 sudo ./install.sh -b -t vimix -i white
 ```
 
-## kde美化
+## kde美化(推荐)
 ### 壁纸
 在桌面右键，选择配置桌面。在新出现的窗口中右下角选择添加图片可以选择你想要的图片。
 ### 系统主题
@@ -536,6 +541,60 @@ Theme will be in use next time you reboot your system.
 - 系统设置 > 鼠标和触摸板 > 鼠标，光标速度-0.50
 - 系统设置 > 无障碍辅助 > 抖动后放大光标
 - 系统设置 > 鼠标和触摸板 > 屏幕边缘，取消左上角屏幕边界的配置
+
+## XFS备份和恢复
+### 准备工作
+```bash
+sudo pacman -S xfsprogs
+```
+### 备份
+```bash
+sudo xfsdump -l 0 -L "root_backup_${date}" -M "root_partition" -f /nas/backup/root_backup.dump /
+```
+```bash
+sudo xfsdump -l 0 -L "home_backup_${date}" -M "home_partition" -f /nas/backup/home_backup.dump /home
+```
+### 验证
+```bash
+sudo xfsdump -I
+```
+### 还原
+1. 进入Live环境
+2. 分区并格式化
+3. 挂载目标分区
+- 挂载/和/home
+```bash
+mount /dev/nvme1n1p2 /mnt
+mkdir /mnt/home
+mount /dev/nvme1n1p3 /mnt/home
+```
+- 开启交换分区
+```bash
+mkswap /dev/nvme0n1p1
+swapon /dev/nvme0n1p1
+```
+4. 还原根分区（/）和家目录分区（/home）
+```bash
+sudo xfsrestore -f /nas/backup/root_backup.dump /mnt
+sudo xfsrestore -f /nas/backup/home_backup.dump /mnt/home
+```
+5. 重建引导和配置文件
+- 生成fstab：
+```bash
+genfstab -U /mnt >> /mnt/etc/fstab
+```
+- 重新配置引导：
+```bash
+arch-chroot /mnt
+grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=Arch --recheck
+grub-mkconfig -o /boot/grub/grub.cfg
+exit
+```
+- 卸载并重启：
+```bash
+umount -R /mnt
+reboot
+```
 
 ## 疑难问题(optional)
 ### 修gdm和nvidia冲突bug(Fuck NVIDIA!)
