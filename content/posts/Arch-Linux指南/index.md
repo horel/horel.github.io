@@ -562,10 +562,10 @@ sudo mkdir -p /nas/xfs_backup
 ```
 ### 备份
 ```bash
-sudo xfsdump -l 0 -L "root_backup_${date}" -M "root_partition" -f /nas/xfs_backup/root_backup.dump /
+sudo xfsdump -l 0 -L "root_backup_$(date +%Y%m%d)" -M "root_backup" -f /nas/xfs_backup/root_backup.dump /
 ```
 ```bash
-sudo xfsdump -l 0 -L "home_backup_${date}" -M "home_partition" -f /nas/xfs_backup/home_backup.dump /home
+sudo xfsdump -l 0 -L "home_backup_$(date +%Y%m%d)" -M "root_backup" -f /nas/xfs_backup/home_backup.dump /home
 ```
 ### 验证
 ```bash
