@@ -630,3 +630,11 @@ sudo grub-mkconfig -o /boot/grub/grub.cfg
 
 - 系统设置里开启网络代理，手动
 - 或者sudo systemctl disable systemd-resolved(可能会导致DN42域名解析错误等等)
+
+### 在sddm中不会自启numlock
+- 创建文件并添加下列内容
+```bash
+sudo nvim /etc/sddm.conf.d/numlock.conf
+```
+> Numlock=on
+- 设置->键盘->Numlock打开
