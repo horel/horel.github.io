@@ -261,7 +261,7 @@ sudo systemctl enable bluetooth
 
 ### 配置CN源
 
-> vim /etc/pacman .conf
+> vim /etc/pacman.conf
 >
 > 加入以下内容
 
@@ -367,7 +367,7 @@ dotfiles submodule update --init
 ### neovim
 安装依赖
 ```bash
-sudo pacman -S neovim nodejs pnpm python python-neovim xsel lua lua-language-server words
+sudo pacman -S neovim nodejs pnpm python python-neovim xsel lua lua-language-server words luarocks
 nvim :checkhealth不用管ruby(我不用)
 ```
 复制dotfiles里的配置, 执行 clean_nvim.sh, 重新运行 nvim 会自动下载
@@ -461,6 +461,9 @@ editor.action.formatDocument.none : ctrl+k ctrl+f
 
 - ImageMagick	安装后可使用display命令
 - android-tools    安卓工具包(adb等)
+```bash
+sudo pacman -S imagemagick mpv flameshot ark unzip 7zip gwenview git-delta
+```
 
 ## ~~gnome美化(废弃)~~
 
@@ -539,23 +542,30 @@ Run the command sudo update grub : sudo grub-mkconfig -o /boot/grub/grub.cfg
 Theme will be in use next time you reboot your system.
 ```
 ### 其他设置
-- 系统设置 > 会话 > 桌面会话，启动为空会话
-- 系统设置 > 键盘 > 虚拟键盘，Fcitx 5 Wayland
-- 系统设置 > 鼠标和触摸板 > 鼠标，光标速度-0.50
-- 系统设置 > 无障碍辅助 > 抖动后放大光标
+- 系统设置 > 鼠标和触摸板 > 鼠标，光标速度-0.60
 - 系统设置 > 鼠标和触摸板 > 屏幕边缘，取消左上角屏幕边界的配置
+- 系统设置 > 键盘 > 虚拟键盘，Fcitx 5 Wayland
+- 系统设置 > 键盘 > 快捷键，火焰截图->进行截图Meta+F1
+- 系统设置 > 键盘 > 快捷键，Alacritty->Meta+回车->Ctrl+Alt+T
+- 系统设置 > 键盘 > 快捷键，KWin->窗口移动到下一桌面->Meta+Tab
+- 系统设置 > 默认应用程序
+- 系统设置 > 窗口管理 > 虚拟桌面 > 2行添加桌面
+- 系统设置 > 会话 > 桌面会话，启动为空会话
+- 系统设置 > 无障碍辅助 > 抖动后放大光标
+
 
 ## XFS备份和恢复
 ### 准备工作
 ```bash
 sudo pacman -S xfsprogs
+sudo mkdir -p /nas/xfs_backup
 ```
 ### 备份
 ```bash
-sudo xfsdump -l 0 -L "root_backup_${date}" -M "root_partition" -f /nas/backup/root_backup.dump /
+sudo xfsdump -l 0 -L "root_backup_${date}" -M "root_partition" -f /nas/xfs_backup/root_backup.dump /
 ```
 ```bash
-sudo xfsdump -l 0 -L "home_backup_${date}" -M "home_partition" -f /nas/backup/home_backup.dump /home
+sudo xfsdump -l 0 -L "home_backup_${date}" -M "home_partition" -f /nas/xfs_backup/home_backup.dump /home
 ```
 ### 验证
 ```bash
@@ -578,8 +588,8 @@ swapon /dev/nvme0n1p1
 ```
 4. 还原根分区（/）和家目录分区（/home）
 ```bash
-sudo xfsrestore -f /nas/backup/root_backup.dump /mnt
-sudo xfsrestore -f /nas/backup/home_backup.dump /mnt/home
+sudo xfsrestore -f /nas/xfs_backup/root_backup.dump /mnt
+sudo xfsrestore -f /nas/xfs_backup/home_backup.dump /mnt/home
 ```
 5. 重建引导和配置文件
 - 生成fstab：
