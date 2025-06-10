@@ -1,71 +1,90 @@
 {
-    "$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
-    "blocks": [
-      {
-        "type": "rprompt",
-        "segments": [
-          {
-            "foreground": "#007ACC",
-            "properties": {
-              "time_format": "15:04:05"
-            },
-            "style": "plain",
-            "template": " {{ .CurrentDate | date .Format }}",
-            "type": "time"
-          }
-        ]
-      },
-
-      {
-        "alignment": "left",
-        "segments": [
-          {
-            "foreground": "#CECE04",
-            "style": "plain",
-            "template": "# ",
-            "type": "root"
+  "$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
+  "blocks": [
+    {
+      "type": "rprompt",
+      "segments": [
+        {
+          "foreground": "yellow",
+          "properties": {
+            "fetch_version": false,
+            "fetch_virtual_env": true,
+            "display_default": false
           },
-          {
-            "foreground": "#c44569",
-            "style": "powerline",
-            "template": "{{ .Icon }} ",
-            "type": "os"
+          "style": "plain",
+          "template": "<{{ if .Root }}lightBlue{{ else }}green{{ end }}>[</>\ue235 {{ if .Error }}{{ .Error }}{{ else }}{{ if .Venv }}{{ .Venv }}{{ end }}{{ .Full }}{{ end }}<{{ if .Root }}lightBlue{{ else }}green{{ end }}>]</>",
+          "type": "python"
+        },
+        {
+          "properties": {
+            "cache_duration": "none",
+            "time_format": "15:04:05"
           },
-          {
-            "foreground": "#7B68EE",
-            "properties": {
-              "style": "agnoster_short"
-            },
-            "style": "plain",
-            "template": "{{ .Path }} ",
-            "type": "path"
+          "template": " {{ .CurrentDate | date .Format }}",
+          "foreground": "#007ACC",
+          "type": "time",
+          "style": "plain"
+        }
+      ]
+    },
+    {
+      "type": "prompt",
+      "alignment": "left",
+      "segments": [
+        {
+          "properties": {
+            "cache_duration": "none"
           },
-          {
-            "foreground": "#48D1CC",
-            "properties": {
-              "branch_icon": "",
-              "fetch_upstream_icon": false
-            },
-            "style": "plain",
-            "template": "HEAD:{{ .UpstreamIcon }}{{ .HEAD }} ",
-            "type": "git"
+          "template": "# ",
+          "foreground": "#CECE04",
+          "type": "root",
+          "style": "plain"
+        },
+        {
+          "properties": {
+            "cache_duration": "none"
           },
-          {
-            "foreground": "#7FFFD4",
-            "foreground_templates": [
-              "{{ if gt .Code 0 }}#E84855{{ end }}"
-            ],
-            "properties": {
-              "always_enabled": true
-            },
-            "style": "plain",
-            "template": "<#66CDAA>\u276f</><#76EEC6>\u276f</><foreground>\u276f</> ",
-            "type": "exit"
-          }
-        ],
-        "type": "prompt"
-      }
-    ],
-    "version": 2
-  }
-  
+          "template": "{{ .Icon }} ",
+          "foreground": "#c44569",
+          "type": "os",
+          "style": "powerline"
+        },
+        {
+          "properties": {
+            "cache_duration": "none",
+            "style": "agnoster_short"
+          },
+          "template": "{{ .Path }} ",
+          "foreground": "#7B68EE",
+          "type": "path",
+          "style": "plain"
+        },
+        {
+          "properties": {
+            "branch_icon": "",
+            "cache_duration": "none",
+            "fetch_upstream_icon": false
+          },
+          "template": "HEAD:{{ .UpstreamIcon }}{{ .HEAD }} ",
+          "foreground": "#48D1CC",
+          "type": "git",
+          "style": "plain"
+        },
+        {
+          "properties": {
+            "always_enabled": true,
+            "cache_duration": "none"
+          },
+          "template": "<#66CDAA>❯</><#76EEC6>❯</><foreground>❯</> ",
+          "foreground": "#7FFFD4",
+          "type": "status",
+          "style": "plain",
+          "foreground_templates": [
+            "{{ if gt .Code 0 }}#E84855{{ end }}"
+          ]
+        }
+      ]
+    }
+  ],
+  "version": 3
+}
