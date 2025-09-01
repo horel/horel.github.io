@@ -1,112 +1,125 @@
 #!/bin/bash
+set -e
 
-# Check if the system is in UEFI mode
-if [ -d /sys/firmware/efi/efivars ]; then
-    echo "The system is in UEFI mode."
-else
-    echo "The system is in BIOS mode, please ensure it meets the installation requirements."
-    exit 1
-fi
-
-# Enable network time synchronization
-echo "Enabling network time synchronization..."
+# ===============================
+# 0. 更新系统时间
+# ===============================
+echo ">>> 更新系统时间"
 timedatectl set-ntp true
 
-# Check time synchronization status
-echo "Checking time synchronization status:"
-timedatectl status
+# ===============================
+# 1. 分区 (UEFI)
+# /boot 1024M ef00
+# /      300G 8304
+# /home 剩余 8302
+# ===============================
+DISK="/dev/nvme0n1"
 
-# List current disk partitions
-echo "Current disk partition information:"
-lsblk
+echo ">>> 分区 $DISK"
+sgdisk --zap-all $DISK
+sgdisk -n 1:0:+1024M -t 1:ef00 -c 1:"EFI System" $DISK
+sgdisk -n 2:0:+300G   -t 2:8304 -c 2:"Linux root x86-64" $DISK
+sgdisk -n 3:0:0       -t 3:8302 -c 3:"Linux home" $DISK
+partprobe $DISK
 
-# Prompt user to select target disk
-read -p "Please enter the disk name to partition (e.g. /dev/nvme0n1): " DISK
+# ===============================
+# 2. 格式化分区
+# ===============================
+echo ">>> 格式化分区"
+mkfs.fat -F32 /dev/nvme0n1p1     # /boot
+mkfs.xfs -f /dev/nvme0n1p2       # /
+mkfs.xfs -f /dev/nvme0n1p3       # /home
 
-# Check if the disk exists
-if [ ! -b "$DISK" ]; then
-    echo "Disk $DISK does not exist, please check if the input is correct."
-    exit 1
-fi
+# ===============================
+# 3. 挂载分区
+# ===============================
+echo ">>> 挂载分区"
+mount /dev/nvme0n1p2 /mnt
+mkdir /mnt/boot
+mount /dev/nvme0n1p1 /mnt/boot
+mkdir /mnt/home
+mount /dev/nvme0n1p3 /mnt/home
 
-# Launch gdisk to partition the disk
-echo "Launching gdisk to partition disk $DISK."
-echo "Note:"
-echo " 1. Use 'd' to delete old partitions."
-echo " 2. Use 'n' to create new partitions as needed."
-echo " 3. Use 'w' to write changes and exit."
+# ===============================
+# 4. 设置镜像源 BFSU
+# ===============================
+echo ">>> 设置 BFSU 镜像源"
+sed -i '1i Server = https://mirrors.bfsu.edu.cn/archlinux/$repo/os/$arch' /etc/pacman.d/mirrorlist
 
-read -p "Press Enter to continue (Please ensure you understand the consequences of partitioning)..."
+# ===============================
+# 5. 安装基础系统及软件包
+# ===============================
+echo ">>> 安装基础系统"
+pacstrap /mnt \
+  bash-completion \
+  iwd \
+  dhcpcd \
+  base base-devel \
+  linux linux-firmware linux-headers \
+  words man man-db man-pages texinfo \
+  vim \
+  xfsprogs ntfs-3g \
+  nvidia nvidia-utils nvidia-settings opencl-nvidia
 
-# Launch gdisk
-gdisk "$DISK"
-
-# Notify user that partitioning is complete
-echo "Partitioning is complete. Please check the partition results using 'lsblk' or 'gdisk -l $DISK'."
-
-# Format partitions
-echo "Formatting partitions, please ensure the partition names are correct!"
-
-# Format the first partition as FAT32
-read -p "Please enter the EFI partition name (e.g. /dev/nvme0n1p1): " EFI_PARTITION
-mkfs.fat -F32 "$EFI_PARTITION"
-echo "EFI partition $EFI_PARTITION formatted to FAT32."
-
-# Format the second partition as XFS
-read -p "Please enter the root partition name (e.g. /dev/nvme0n1p2): " ROOT_PARTITION
-mkfs.xfs "$ROOT_PARTITION"
-echo "Root partition $ROOT_PARTITION formatted to XFS."
-
-# Format the third partition as XFS
-read -p "Please enter the /home partition name (e.g. /dev/nvme0n1p3): " HOME_PARTITION
-mkfs.xfs "$HOME_PARTITION"
-echo "/home partition $HOME_PARTITION formatted to XFS."
-
-echo "All partitions are formatted, please check the formatting results!"
-
-# Mount root partition
-echo "Mounting root partition..."
-mount "$ROOT_PARTITION" /mnt
-echo "Root partition $ROOT_PARTITION mounted to /mnt."
-
-# Create and mount EFI partition
-echo "Creating /mnt/boot directory and mounting EFI partition..."
-mkdir -p /mnt/boot
-mount "$EFI_PARTITION" /mnt/boot
-echo "EFI partition $EFI_PARTITION mounted to /mnt/boot."
-
-# Create and mount /home partition
-echo "Creating /mnt/home directory and mounting /home partition..."
-mkdir -p /mnt/home
-mount "$HOME_PARTITION" /mnt/home
-echo "/home partition $HOME_PARTITION mounted to /mnt/home."
-
-echo "All partitions are mounted, please check the mount results."
-
-# Set up software repositories
-echo "Setting up Arch Linux software repositories..."
-# Edit mirrorlist file
-echo "Opening /etc/pacman.d/mirrorlist file to set up mirrors..."
-echo "Server = https://mirrors.bfsu.edu.cn/archlinux/\$repo/os/\$arch" > /etc/pacman.d/mirrorlist
-echo "Mirror set to: https://mirrors.bfsu.edu.cn/archlinux/\$repo/os/\$arch"
-echo "Please check and confirm if the mirror settings are correct."
-vim /etc/pacman.d/mirrorlist
-echo "Software repository setup completed. Please confirm if the configuration is effective."
-
-# Install necessary packages
-echo "Installing necessary packages..."
-# Use pacstrap to install packages
-pacstrap /mnt bash-completion iwd dhcpcd base base-devel linux linux-firmware linux-headers words man man-db man-pages texinfo vim xfsprogs ntfs-3g 
-echo "Package installation completed, please check if the installation is successful."
-
-# Generate fstab file
-echo "Generating fstab file..."
-# Use genfstab to generate and append to /mnt/etc/fstab
+# ===============================
+# 6. 生成 fstab
+# ===============================
+echo ">>> 生成 fstab"
 genfstab -U /mnt >> /mnt/etc/fstab
-echo "fstab file generated and saved to /mnt/etc/fstab."
 
-# Enter chroot environment
-echo "Entering chroot environment..."
-# Use arch-chroot to enter /mnt
-arch-chroot /mnt
-echo "Entered chroot environment, you can now configure the system."
+# ===============================
+# 7. chroot 进入新系统进行配置
+# ===============================
+arch-chroot /mnt /bin/bash <<'EOF'
+set -e
+
+echo ">>> 设置时区"
+ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+hwclock --systohc
+
+echo ">>> 配置 locale"
+sed -i 's/#zh_CN.UTF-8 UTF-8/zh_CN.UTF-8 UTF-8/' /etc/locale.gen
+sed -i 's/#en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen
+locale-gen
+echo "LANG=en_US.UTF-8" > /etc/locale.conf
+
+echo ">>> 设置主机名"
+echo "REZE" > /etc/hostname
+
+echo ">>> 配置 hosts"
+cat >> /etc/hosts <<HOSTS
+127.0.0.1   localhost
+::1         localhost
+127.0.1.1   REZE.localdomain REZE
+
+echo ">>> 设置 root 密码"
+echo "root:123456" | chpasswd
+
+echo ">>> 安装 Intel 微码"
+pacman -Sy --noconfirm intel-ucode
+
+echo ">>> 生成 initramfs"
+mkinitcpio -P
+
+echo ">>> 安装 GRUB 引导"
+pacman -Sy --noconfirm grub efibootmgr
+
+# 安装 GRUB
+grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=Arch --recheck
+grub-mkconfig -o /boot/grub/grub.cfg
+
+echo ">>> 创建 swapfile 16G"
+fallocate -l 16G /home/swapfile
+chmod 600 /home/swapfile
+mkswap /home/swapfile
+swapon /home/swapfile
+echo "/home/swapfile none swap sw 0 0" >> /etc/fstab
+
+EOF
+
+# ===============================
+# 8. 卸载并重启
+# ===============================
+echo ">>> 卸载分区并重启"
+umount -R /mnt
+reboot
