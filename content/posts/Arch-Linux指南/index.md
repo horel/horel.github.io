@@ -31,7 +31,39 @@ lsblk
 ```bash
 sudo dd if=/path/to/archlinux.iso of=/dev/sdX bs=4M status=progress conv=fsync
 ```
+### 引导参数修改(可选)
+> 若正常启动后花屏,说明显卡驱动有问题(例如NVIDIA显卡太新还没有开源驱动)
 
+启动项按e添加```modprobe.blacklist=nouveau```以禁用开源驱动
+
+## SSH远程安装(可选)
+### 联网
+- 有线插网线直接连接
+- 无线使用iwd连接
+```bash
+iwctl device list
+ip link set wlan0 up
+iwctl station wlan0 scan
+iwctl station wlan0 get-networks
+iwctl station wlan0 connect "你的SSID" --passphrase "你的密码"
+```
+### 修改root密码
+默认root密码为空，不允许使用ssh连接
+```bash
+passwd
+```
+### 开启SSH服务
+```bash
+systemctl start sshd
+```
+### 查看ip
+```bash
+ip a
+```
+### 远程连接
+```bash
+ssh root@192.168.0.xxx
+```
 ## 基础系统安装
 ### 确认是否为 UEFI 模式
 
@@ -39,22 +71,6 @@ sudo dd if=/path/to/archlinux.iso of=/dev/sdX bs=4M status=progress conv=fsync
 ls /sys/firmware/efi/efivars
 ```
 若输出了一堆东西，即 efi 变量，则说明已在 UEFI 模式。否则请确认你的启动方式是否为 UEFI。
-
-### 启动参数修改(optional)
-
-> 若正常启动后花屏,说明显卡驱动有问题(例如NviDIA显卡太新还没有开源驱动)
-
-启动项按e添加```modprobe.blacklist=nouveau```以禁用开源驱动
-
-### 联网
-- 有线插网线直接连接
-- 无线使用iwd连接
-```bash
-iwctl
-device list
-station wlan0 scan
-station wlan0 connect "网络名_xxx"
-```
 
 ### 更新系统时间
 
@@ -68,9 +84,8 @@ timedatectl status
 我在/dev/nvme0n1这块硬盘上分了三个区，swap我采用swapfile，后续会分配
 
 - /boot   1024M	   ef00
-- /       100G     8304
+- /       200G     8304
 - /home   300G     8302
-- ~~swap    8G       8200~~
 > 使用以下命令分区
 
 ```bash
@@ -88,9 +103,6 @@ mkfs.fat -F32 /dev/nvme0n1p1
 mkfs.xfs /dev/nvme0n1p2
 mkfs.xfs /dev/nvme0n1p3
 ```
-~~mkswap /dev/nvme0n1p4~~
-
-~~swapon /dev/nvme0n1p4~~
 > 然后挂载分区
 
 ```bash
@@ -114,7 +126,18 @@ vim /etc/pacman.d/mirrorlist
 ### 安装必须软件包
 
 ```bash
-pacstrap /mnt bash-completion iwd dhcpcd base base-devel linux linux-firmware linux-headers words man man-db man-pages texinfo vim xfsprogs ntfs-3g nvidia nvidia-utils nvidia-settings opencl-nvidia
+pacstrap /mnt \
+  base base-devel linux linux-firmware linux-headers \
+  grub efibootmgr \
+  iwd dhcpcd openssh \
+  man man-db man-pages texinfo words \
+  xfsprogs xfsdump ntfs-3g \
+  nvidia nvidia-utils nvidia-settings opencl-nvidia \
+  amd-ucode intel-ucode \
+  gcc gdb clang llvm nodejs pnpm \
+  bash-completion zsh \
+  git vim neovim wget fastfetch run-parts
+  
 ```
 
 ### 生成Fstab
@@ -129,6 +152,21 @@ vim /mnt/etc/fstab
 ```bash
 arch-chroot /mnt
 ```
+
+### 设置交换文件 swapfile
+```bash
+dd if=/dev/zero of=/swapfile bs=1M count=16384 status=progress #创建16G的交换空间 大小根据需要自定 休眠需要大于等于内存
+chmod 600 /swapfile #设置正确的权限
+mkswap /swapfile #格式化swap文件
+swapon /swapfile #启用swap文件
+```
+最后，向/etc/fstab 中追加如下内容：
+```bash
+/swapfile none swap defaults 0 0
+```
+### 挂起设置
+KDE 自身提供开箱即用的睡眠功能(suspend)，即将系统挂起到内存，消耗少量的电量。休眠(hibernate)会将系统挂起到交换分区或文件，几乎不消耗电量。睡眠功能已可满足绝大多数人的需求，如果你一定需要休眠功能，可以参考[官方文档](https://wiki.archlinux.org/title/Power_management/Suspend_and_hibernate)设置休眠相关步骤。
+
 
 ### 本地化
 
@@ -164,16 +202,10 @@ vim /etc/hosts
 ::1		localhost
 127.0.1.1	AORUS.localdomain	AORUS
 ```
-### 安装微码
-```bash
-pacman -S amd-ucode
-```
-```bash
-pacman -S intel-ucode
-```
 
 ### 生成Initramfs
-
+> 若在可移动设备上安装: 
+> 修改 /etc/mkinitcpio.conf，将 block 和 keyboard 钩子移动到 autodetect 钩子之前。这样才能在分别需要早期用户空间中不同模块的系统上启动。
 ```bash
 mkinitcpio -P
 ```
@@ -183,19 +215,28 @@ mkinitcpio -P
 ```bash
 passwd
 ```
-
-### 安装grub
+### 新建用户并授权
 
 ```bash
-pacman -Sy grub efibootmgr os-prober
-cd ~
-mkdir MS
-mount /dev/nvme1n1p1 MS
+useradd -m -G wheel 用户名(horel)
+EDITOR=vim visudo
+取消注释 %wheel ALL=(ALL:ALL) ALL
+passwd 用户名(horel)
+```
 
+### 安装grub
+```bash
+#这一部分为可选项
 #要注意os_prober已经默认不识别其他系统了, 挂载windows的efi所在的分区再配置grub-mkconfig即可
+pacman -Sy os-prober
+mkdir /tmp/MS
+mount /dev/nvme1n1p1 /tmp/MS
 vim /etc/default/grub
 最后一行填入GRUB_DISABLE_OS_PROBER=false
-
+#如果在可移动设备上安装 Arch Linux
+grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=Arch --recheck --removable
+```
+```bash
 grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=Arch --recheck
 grub-mkconfig -o /boot/grub/grub.cfg
 
@@ -215,24 +256,15 @@ systemctl start dhcpcd
 ```bash
 systemctl start iwd
 dhcpcd
-iwctl
-station wlan0 connect "网络名_xxx"
+iwctl station wlan0 connect "你的SSID" --passphrase "你的密码"
 ```
 ### 开启ssh服务
 ```bash
-pacman -S openssh
-systemctl enable --now sshd
+systemctl start sshd
 ```
-
-### 新建用户并授权
-
+此时ssh不允许使用root账户登录
 ```bash
-useradd -m -G wheel 用户名(horel)
-EDITOR=vim visudo
-取消注释 %wheel ALL=(ALL) ALL
-passwd 用户名(horel)
-exit
-以新用户重新登陆
+ssh horel@192.168.0.xxx
 ```
 
 ### 安装桌面
@@ -251,6 +283,7 @@ sudo pacman -S plasma-meta konsole dolphin  #安装plasma-meta元软件包以及
 sudo systemctl preset-all
 sudo systemctl enable NetworkManager
 sudo systemctl enable bluetooth
+sudo systemctl enable sshd
 ```
 - gnome:
 
@@ -261,7 +294,7 @@ sudo systemctl enable bluetooth
 
 ### 配置CN源
 
-> vim /etc/pacman.conf
+> sudo vim /etc/pacman.conf
 >
 > 加入以下内容
 
@@ -271,7 +304,7 @@ Server = https://mirrors.bfsu.edu.cn/archlinuxcn/$arch
 
 ### pacman配置
 
-> vim /etc/pacman.conf	吃豆人、升级前后对比版本
+> sudo vim /etc/pacman.conf	吃豆人、升级前后对比版本
 
 Color
 
@@ -282,24 +315,25 @@ VerbosePkgLists
 ### 安装常用软件
 
 ```bash
-sudo pacman -S zsh neovim alacritty git wget telegram chromium neofetch gcc gdb clang llvm nodejs pnpm clash-verge-rev run-parts paru
-```
-### 设置交换文件 swapfile
-```bash
-dd if=/dev/zero of=/swapfile bs=1M count=32768 status=progress #创建32G的交换空间 大小根据需要自定 最好大于等于内存
-chmod 600 /swapfile #设置正确的权限
-mkswap /swapfile #格式化swap文件
-swapon /swapfile #启用swap文件
-```
-最后，向/etc/fstab 中追加如下内容：
-```bash
-/swapfile none swap defaults 0 0
-```
-### 挂起设置
+sudo pacman -Sy archlinux-keyring archlinuxcn-keyring 
+sudo pacman -S paru alacritty chromium clash-verge-rev
+paru -S google-chrome visual-studio-code-bin
 
-KDE 自身提供开箱即用的睡眠功能(suspend)，即将系统挂起到内存，消耗少量的电量。休眠(hibernate)会将系统挂起到交换分区或文件，几乎不消耗电量。睡眠功能已可满足绝大多数人的需求，如果你一定需要休眠功能，可以参考[官方文档](https://wiki.archlinux.org/title/Power_management/Suspend_and_hibernate)设置休眠相关步骤。
+```
 
 ## 软件安装配置
+### 安装软件
+```bash
+sudo pacman -S --needed \
+  noto-fonts noto-fonts-extra noto-fonts-cjk noto-fonts-emoji noto-fonts-extra \
+  ttf-sarasa-gothic ttf-nerd-fonts-symbols-mono ttf-opensans ttf-jetbrains-mono \
+  adobe-source-han-serif-cn-fonts adobe-source-code-pro-fonts \
+  adobe-source-sans-pro-fonts adobe-source-serif-pro-fonts wqy-zenhei \
+  fcitx5-im fcitx5-chinese-addons fcitx5-pinyin-{zhwiki,moegirl} fcitx5-qt fcitx5-gtk fcitx5-material-color \
+  exa zoxide \
+  neovim nodejs pnpm python python-neovim xsel lua lua-language-server words luarocks \
+  imagemagick mpv flameshot ark unzip 7zip gwenview git-delta
+```
 
 ### dotfiles
 
