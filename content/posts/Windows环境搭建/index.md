@@ -104,6 +104,8 @@ Import-Module z
 
 ## VSCode
 > https://code.visualstudio.com/
+- 安装时勾选注册到打开目录上下文
+
 - 导出插件
 ```
 code --list-extensions > code_extensions.txt
