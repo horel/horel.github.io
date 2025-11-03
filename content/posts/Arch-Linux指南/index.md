@@ -316,8 +316,8 @@ VerbosePkgLists
 
 ```bash
 sudo pacman -Sy archlinux-keyring archlinuxcn-keyring 
-sudo pacman -S paru alacritty chromium clash-verge-rev
-paru -S google-chrome visual-studio-code-bin
+sudo pacman -S paru alacritty chromium
+paru -S google-chrome visual-studio-code-bin flclash-bin
 
 ```
 

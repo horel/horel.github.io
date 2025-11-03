@@ -1,7 +1,7 @@
 ---
 title: "PVE服务器指南"
 comment: false
-weight: 2
+weight: 0
 date: 2025-02-22T23:52:36+08:00
 # 由 enableGitInfo 替代
 # lastmod: 22000-02-02
