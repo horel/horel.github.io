@@ -1,9 +1,9 @@
 ---
 title: CMake Example
 comment: false
-categories: ["C++"]
+categories: ["环境"]
 tags:
-  - C++
+  - 环境
 date: 2021-11-21 21:09:34
 cover:
 ---

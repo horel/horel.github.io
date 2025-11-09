@@ -10,9 +10,9 @@ date: 2025-11-03T21:58:40+08:00
 # featuredImage: ""
 # featuredImagePreview: ""
 # keywords: [""]
-categories: ["杂项"]
+categories: ["环境"]
 tags:
-  - 杂项
+  - 环境
 ---
 
 ## Conda安装
