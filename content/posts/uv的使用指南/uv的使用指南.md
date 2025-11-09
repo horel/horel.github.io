@@ -46,7 +46,7 @@ uv python uninstall 3.12
 ```bash
 uv init example --python 3.12
 cd example
-source .venv/bin/activate
+
 ```
 - 先创建目录再初始化项目
 ```bash
@@ -54,12 +54,42 @@ cd example
 uv python pin 3.12
 uv init
 uv venv
+```
+
+## 激活环境
+- Linux
+```bash
 source .venv/bin/activate
+```
+- Windows
+```powershell
+.venv\Scripts\Activate.ps1
 ```
 
 ## 安装包
 ```bash
 uv add torch==2.9.0+cu130 torchvision==0.24.0 torchaudio==2.9.0 --default-index https://download.pytorch.org/whl/cu130
+```
+## 测试
+```python
+import torch
+
+def check_torch_cuda():
+    print("✅ PyTorch 版本:", torch.__version__)
+    print("✅ PyTorch 内置 CUDA 版本:", torch.version.cuda)
+    print("✅ PyTorch 内置 cuDNN 版本:", torch.backends.cudnn.version())
+
+    if torch.cuda.is_available():
+        print("\n🔥 GPU 加速状态：已激活")
+        print("• 当前显卡型号:", torch.cuda.get_device_name(0))
+        print("• 可用 GPU 数量:", torch.cuda.device_count())
+        print("• 显存总容量: {:.2f} GB".format(
+            torch.cuda.get_device_properties(0).total_memory / 1e9))
+    else:
+        print("\n❌ GPU 加速状态：未检测到可用显卡")
+
+if __name__ == "__main__":
+    check_torch_cuda()
 ```
 
 ## 退出隔离环境
