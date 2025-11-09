@@ -32,26 +32,26 @@ uv python list
 ```
 安装指定版本
 ```bash
-uv python install 3.9
+uv python install 3.12
 ```
 > 装好的解释器放在 ~/.local/share/uv/python，无需 root，与系统 Python 无关
 
 删除指定版本
 ```bash
-uv python uninstall 3.9
+uv python uninstall 3.12
 ```
 
 ## 创建隔离环境
-直接创建项目
+- 直接创建项目
 ```bash
-uv init example --python 3.9
+uv init example --python 3.12
 cd example
 source .venv/bin/activate
 ```
-先创建目录再初始化项目
+- 先创建目录再初始化项目
 ```bash
 cd example
-uv python pin 3.9
+uv python pin 3.12
 uv init
 uv venv
 source .venv/bin/activate
@@ -59,8 +59,7 @@ source .venv/bin/activate
 
 ## 安装包
 ```bash
-uv add torch==2.7.0+cu118 torchvision==0.22.0 torchaudio==2.7.0 \
-   --index-url https://download.pytorch.org/whl/cu118
+uv add torch==2.9.0+cu130 torchvision==0.24.0 torchaudio==2.9.0 --default-index https://download.pytorch.org/whl/cu130
 ```
 
 ## 退出隔离环境
