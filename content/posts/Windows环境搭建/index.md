@@ -10,9 +10,9 @@ date: 2024-11-07T00:42:28+08:00
 # featuredImage: ""
 # featuredImagePreview: ""
 # keywords: [""]
-categories: ["杂项"]
+categories: ["系统"]
 tags:
-  - 杂项
+  - 系统
 ---
 
 # Windows环境搭建

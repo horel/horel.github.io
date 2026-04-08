@@ -10,9 +10,9 @@ date: 2025-02-22T23:52:36+08:00
 # featuredImage: ""
 # featuredImagePreview: ""
 # keywords: [""]
-categories: ["杂项"]
+categories: ["系统"]
 tags:
-  - 杂项
+  - 系统
 ---
 
 # PVE服务器指南

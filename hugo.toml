@@ -24,7 +24,7 @@ theme = "FeelIt"
   # 网站描述
   description = "Welcome to Horel's blog."
   # 网站关键词
-  keywords = ["C/C++", "Computer Graphics", "UE5"]
+  keywords = ["C/C++", "Linux", "kernel"]
   # 网站默认主题样式 ("light", "dark", "auto")
   defaultTheme = "auto"
   # 公共 git 仓库路径，仅在 enableGitInfo 设为 true 时有效
@@ -152,29 +152,29 @@ theme = "FeelIt"
     paramTitle = "Personal Information"
     # 您网站的一般描述
     # 可以用markdown样式写
-    description = "<h1>This&#39;s Horel&#39;s Personal Blog.</h1><p>Mainly about Computer Graphics, C/C++ and UE5.</p><p>Welcome to exchange technology with me.</p><p>You can find my essays about anime and games on <a href=\"https://horel.github.io\">here</a>.</p>"
+    description = "<h1>This&#39;s Horel&#39;s Personal Blog.</h1><p>Mainly about C/C++, Linux and kernel.</p><p>Welcome to exchange technology with me.</p><p>You can find my essays about anime and games on <a href=\"https://horel.github.io\">here</a>.</p>"
     # 你的状态描述
     [[params.about.status]]
       faIcon = "fas fa-building"
       title = "School"
-      desc = "DLUT"
+      desc = "DLUT / LZU"
     [[params.about.status]]
       faIcon = "fas fa-briefcase fa-fw"
       title = "Career"
-      desc = "Undergraduate"
+      desc = "Undergraduate / Postgraduate"
     [[params.about.status]]
       title = "Location"
       faIcon = "fas fa-map-marker-alt"
-      desc = "Dalian"
+      desc = "Dalian / Lanzhou"
     # 参数说明
-    [[params.about.parameter]]
-      language = "Computer Graphics"
-      level = "50"
     [[params.about.parameter]]
       language = "C/C++"
       level = "60"
     [[params.about.parameter]]
-      language = "UE5"
+      language = "Linux"
+      level = "70"
+    [[params.about.parameter]]
+      language = "kernel"
       level = "20"
 
   # 主页配置
