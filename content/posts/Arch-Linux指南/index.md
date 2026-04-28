@@ -232,6 +232,7 @@ vim /etc/hosts
 > 若在可移动设备上安装: 
 > 修改 /etc/mkinitcpio.conf，将 block 和 keyboard 钩子移动到 autodetect 钩子之前。这样才能在分别需要早期用户空间中不同模块的系统上启动。
 ```bash
+pacman -S intel-ucode amd-ucode
 mkinitcpio -P
 ```
 
@@ -257,7 +258,8 @@ pacman -Sy os-prober
 mkdir /tmp/MS
 mount /dev/nvme1n1p1 /tmp/MS
 vim /etc/default/grub
-最后一行填入GRUB_DISABLE_OS_PROBER=false
+#最后一行填入GRUB_DISABLE_OS_PROBER=false
+#GRUB_CMDLINE_LINUX_DEFAULT 一行中加入 nowatchdog 参数，这可以显著提高开关机速度
 #如果在可移动设备上安装 Arch Linux
 grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=Arch --recheck --removable
 ```
