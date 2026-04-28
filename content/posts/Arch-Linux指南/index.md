@@ -21,9 +21,10 @@ date: 2021-04-26 22:50:04
 
 ### 制作启动盘
 
-- win10/11系统推荐使用rufus软件烧录：[rufus](https://rufus.ie/zh)
-- linux系统：
-  - 先使用lsblk查看自己的U盘，找到对应的设备名称，例如 /dev/sdX（其中 X 是具体字母，如 sdb）
+> win10/11系统推荐使用rufus软件烧录：[rufus](https://rufus.ie/zh)
+
+> linux系统：
+- 先使用lsblk查看自己的U盘，找到对应的设备名称，例如 /dev/sdX（其中 X 是具体字母，如 sdb）
 ```bash
 lsblk
 ```
@@ -96,21 +97,37 @@ gdisk /dev/nvme0n1
 用w确定并退出
 ```
 
-> 接下来格式化分区
-
+> 格式化分区并挂载(XFS)
 ```bash
 mkfs.fat -F32 /dev/nvme0n1p1
 mkfs.xfs /dev/nvme0n1p2
 mkfs.xfs /dev/nvme0n1p3
 ```
-> 然后挂载分区
-
 ```bash
 mount /dev/nvme0n1p2 /mnt
 mkdir /mnt/boot
 mkdir /mnt/home
 mount /dev/nvme0n1p1 /mnt/boot
 mount /dev/nvme0n1p3 /mnt/home
+```
+
+> 格式化分区并挂载(btrfs)
+```bash
+mkfs.fat -F32 /dev/nvme0n1p1
+mkfs.btrfs -L Root /dev/nvme0n1p2
+mkfs.btrfs -L Home /dev/nvme0n1p3
+mount -t btrfs -o compress=zstd /dev/nvme0n1p2 /mnt
+btrfs subvolume create /mnt/@
+btrfs subvolume create /mnt/@home
+btrfs subvolume list -p /mnt
+umount /mnt
+```
+```bash
+mount -t btrfs -o subvol=/@,compress=zstd /dev/nvme0n1p2 /mnt # 挂载 / 目录
+mkdir /mnt/home # 创建 /home 目录
+mount -t btrfs -o subvol=/@home,compress=zstd /dev/nvme0n1p3 /mnt/home # 挂载 /home 目录
+mkdir -p /mnt/boot # 创建 /boot 目录
+mount /dev/nvme0n1p1 /mnt/boot # 挂载 /boot 目录
 ```
 
 ### 选择镜像
@@ -126,17 +143,25 @@ vim /etc/pacman.d/mirrorlist
 ### 安装必须软件包
 
 ```bash
+pacstrap /mnt base base-devel linux linux-firmware btrfs-progs \
+  archlinux-keyring \
+  networkmanager vim sudo zsh zsh-completions
+# 如果使用xfs文件系统，安装xfsprogs xfsdump包
+```
+
+> 一次性安装好后续所有软件包
+```bash
 pacstrap /mnt \
   base base-devel linux linux-firmware linux-headers \
   grub efibootmgr \
   iwd dhcpcd openssh \
   man man-db man-pages texinfo words \
-  xfsprogs xfsdump ntfs-3g \
+  xfsprogs xfsdump btrfs-progs \
   nvidia nvidia-utils nvidia-settings opencl-nvidia \
   amd-ucode intel-ucode \
   gcc gdb clang llvm nodejs pnpm \
   bash-completion zsh \
-  git vim neovim wget fastfetch run-parts
+  git vim neovim wget fastfetch run-parts tree-sitter-cli
   
 ```
 
